@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import crasync
-from ext import embedtobox
+import json
 import os
 
 
@@ -9,7 +9,7 @@ class Profile:
 
     def __init__(self, bot):
         self.bot = bot
-        with open(dta / config.json') as f:
+        with open('data/config.json') as f:
             config = json.load(f)
             if 'TAG' not in config:
                 tag = None
