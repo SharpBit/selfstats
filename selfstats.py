@@ -76,8 +76,9 @@ class Selfbot(commands.Bot):
 
     @property
     def tag(self):
+        '''Returns your Clash Royale tag'''
         from_heroku = os.environ.get('TAG')
-        return str(from_heroku) if from_heroku else TAG
+        return str(from_heroku).strip('#') if from_heroku else TAG
 
     @staticmethod
     async def get_pre(bot, message):
@@ -186,22 +187,22 @@ class Selfbot(commands.Bot):
 
         embed.set_author(name='selfstats.py', icon_url=ctx.author.avatar_url)
 
-        total_online = len({m.id for m in self.bot.get_all_members()
+        total_online = len({m.id for m in self.get_all_members()
                             if m.status is discord.Status.online})
-        total_unique = len(self.bot.users)
+        total_unique = len(self.users)
 
         voice_channels = []
         text_channels = []
-        for guild in self.bot.guilds:
+        for guild in self.guilds:
             voice_channels.extend(guild.voice_channels)
             text_channels.extend(guild.text_channels)
 
         text = len(text_channels)
         voice = len(voice_channels)
-        dm = len(self.bot.private_channels)
+        dm = len(self.private_channels)
 
         now = datetime.datetime.utcnow()
-        delta = now - self.bot.uptime
+        delta = now - self.uptime
         hours, remainder = divmod(int(delta.total_seconds()), 3600)
         minutes, seconds = divmod(remainder, 60)
         days, hours = divmod(hours, 24)
@@ -216,11 +217,11 @@ class Selfbot(commands.Bot):
 
         embed.add_field(name='Author', value='Jason#1510')
         embed.add_field(name='Uptime', value=uptime)
-        embed.add_field(name='Guilds', value=len(self.bot.guilds))
+        embed.add_field(name='Guilds', value=len(self.guilds))
         embed.add_field(name='Members', value=f'{total_unique} total\n{total_online} online')
         embed.add_field(name='Channels', value=f'{text} text\n{voice} voice\n{dm} direct')
-        memory_usage = self.bot.process.memory_full_info().uss / 1024**2
-        cpu_usage = self.bot.process.cpu_percent() / psutil.cpu_count()
+        memory_usage = self.process.memory_full_info().uss / 1024**2
+        cpu_usage = self.process.cpu_percent() / psutil.cpu_count()
         embed.add_field(name='Process', value=f'{memory_usage:.2f} MiB\n{cpu_usage:.2f}% CPU')
         embed.add_field(name='GitHub', value=github)
         embed.add_field(name='Discord', value=server)
