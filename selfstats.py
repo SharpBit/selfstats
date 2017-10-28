@@ -17,6 +17,8 @@ import os
 import re
 import io
 
+TAG = 0
+
 
 class Selfbot(commands.Bot):
     '''Custom Client for selfstats.py - Made by Jason#1510'''
@@ -37,8 +39,15 @@ class Selfbot(commands.Bot):
         self.messages_sent = 0
         self.commands_used = defaultdict(int)
         self.remove_command('help')
-        self.add_command(self.ping)
+        self._add_commansd()
         self.load_extensions()
+
+    def _add_commands(self):
+        '''Adds commands automatically'''
+        for attr in dir(self):
+            cmd = getattr(self, attr)
+            if isinstance(cmd, commands.Command):
+                self.add_command(cmd)
 
     def load_extensions(self, cogs=None, path='cogs.'):
         '''Loads the default set of extensions or a separate one if given'''
@@ -53,32 +62,28 @@ class Selfbot(commands.Bot):
     @property
     def token(self):
         '''Returns your token'''
-        with open('data/config.json') as f:
-            config = json.load(f)
-            if config.get('TOKEN') == "your_token_here":
-                if not os.environ.get('TOKEN'):
-                    self.run_wizard()
-            else:
-                token = config.get('TOKEN').strip('\"')
+        try:
+            with open('data/config.json') as f:
+                config = json.load(f)
+                if config.get('TOKEN') == "your_token_here":
+                    if not os.environ.get('TOKEN'):
+                        self.run_wizard()
+                    else:
+                        token = config.get('TOKEN').strip('\"')
+        except FileNotFoundError:
+            token = None
         return os.environ.get('TOKEN') or token
 
     @property
     def tag(self):
-        '''Returns your Clash Royale tag'''
-        with open('data/config.json') as f:
-            config = json.load(f)
-            if config.get('TAG') == "your_tag_here":
-                if not os.environ.get('TAG'):
-                    self.run_wizard()
-            else:
-                tag = config.get('TAG').strip('#')
-        return os.environ.get('TAG') or tag
+        from_heroku = os.environ.get('TAG')
+        return int(from_heroku) if from_heroku else TAG
 
     @staticmethod
     async def get_pre(bot, message):
         '''Returns the prefix'''
         with open('data/config.json') as f:
-            prefix = load.json(f).get('PREFIX')
+            prefix = json.load(f).get('PREFIX')
         return os.environ.get('PREFIX') or prefix or 'cr.'
 
     @staticmethod
@@ -171,6 +176,56 @@ class Selfbot(commands.Bot):
             em_list = await embedtobox.etb(em)
             for page in em_list:
                 await ctx.send(page)
+
+    @commands.command(aliases=['bot', 'info'])
+    async def about(self, ctx):
+        '''See information about the selfbot and latest changes.'''
+
+        embed = discord.Embed()
+        embed.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+
+        embed.set_author(name='selfstats.py', icon_url=ctx.author.avatar_url)
+
+        total_online = len({m.id for m in self.bot.get_all_members()
+                            if m.status is discord.Status.online})
+        total_unique = len(self.bot.users)
+
+        voice_channels = []
+        text_channels = []
+        for guild in self.bot.guilds:
+            voice_channels.extend(guild.voice_channels)
+            text_channels.extend(guild.text_channels)
+
+        text = len(text_channels)
+        voice = len(voice_channels)
+        dm = len(self.bot.private_channels)
+
+        now = datetime.datetime.utcnow()
+        delta = now - self.bot.uptime
+        hours, remainder = divmod(int(delta.total_seconds()), 3600)
+        minutes, seconds = divmod(remainder, 60)
+        days, hours = divmod(hours, 24)
+
+        fmt = '{h}h {m}m {s}s'
+        if days:
+            fmt = '{d}d ' + fmt
+        uptime = fmt.format(d=days, h=hours, m=minutes, s=seconds)
+
+        github = '[Click Here](https://github.com/SharpBit/selfstats/)'
+        server = '[Click Here](https://discord.gg/9NjbQCd)'
+
+        embed.add_field(name='Author', value='Jason#1510')
+        embed.add_field(name='Uptime', value=uptime)
+        embed.add_field(name='Guilds', value=len(self.bot.guilds))
+        embed.add_field(name='Members', value=f'{total_unique} total\n{total_online} online')
+        embed.add_field(name='Channels', value=f'{text} text\n{voice} voice\n{dm} direct')
+        memory_usage = self.bot.process.memory_full_info().uss / 1024**2
+        cpu_usage = self.bot.process.cpu_percent() / psutil.cpu_count()
+        embed.add_field(name='Process', value=f'{memory_usage:.2f} MiB\n{cpu_usage:.2f}% CPU')
+        embed.add_field(name='GitHub', value=github)
+        embed.add_field(name='Discord', value=server)
+        embed.set_footer(text=f'Powered by discord.py {discord.__version__}')
+        await ctx.send(embed=embed)
 
 
 if __name__ == '__main__':
