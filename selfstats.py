@@ -77,7 +77,7 @@ class Selfbot(commands.Bot):
     @property
     def tag(self):
         from_heroku = os.environ.get('TAG')
-        return int(from_heroku) if from_heroku else TAG
+        return str(from_heroku) if from_heroku else TAG
 
     @staticmethod
     async def get_pre(bot, message):
