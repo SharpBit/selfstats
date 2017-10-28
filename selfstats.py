@@ -5,6 +5,7 @@ from ext.formatter import EmbedHelp
 from collections import defaultdict
 from ext import embedtobox
 import textwrap
+import crasync
 import asyncio
 import aiohttp
 import psutil
@@ -60,6 +61,18 @@ class Selfbot(commands.Bot):
             else:
                 token = config.get('TOKEN').strip('\"')
         return os.environ.get('TOKEN') or token
+
+    @property
+    def tag(self):
+        '''Returns your Clash Royale tag'''
+        with open('data/config.json') as f:
+            config = json.load(f)
+            if config.get('TAG') == "your_tag_here":
+                if not os.environ.get('TAG'):
+                    self.run_wizard()
+            else:
+                tag = config.get('TAG').strip('#')
+        return os.environ.get('TAG') or tag
 
     @staticmethod
     async def get_pre(bot, message):

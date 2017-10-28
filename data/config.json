@@ -1,4 +1,5 @@
 {
     "TOKEN": "your_token_here",
-    "PREFIX": "cr."
+    "PREFIX": "cr.",
+    "TAG": "your_tag_here"
 }
