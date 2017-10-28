@@ -43,3 +43,7 @@ class Profile:
             em.set_author(name='Profile')
 
         await ctx.send(embed=em)
+
+
+def setup(bot):
+    bot.add_cog(Profile(bot))
