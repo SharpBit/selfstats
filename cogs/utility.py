@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from ext.color import ColorNames
+from ext.colors import ColorNames
 from PIL import Image
 import io
 
