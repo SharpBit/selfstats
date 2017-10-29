@@ -48,10 +48,19 @@ class Profile:
         highest_trophies = str(profile.highest_trophies)
         legend_trophies = str(profile.legend_trophies)
         arena = profile.arena.name + ' | Arena ' + str(profile.arena.number)
+
         donations = str(profile.total_donations)
         win_decimal = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}'
         win_percent = win_decimal + '%'
         record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
+
+        deck = profile.deck
+        deck_levels = {}
+        for card in deck:
+            deck_levels[card.name] = 'Lvl ' + str(card.level)
+        fmt = ''
+        for key, value in deck_levels.iteritems():
+            fmt += key + ': ' + value + '\n'
 
         em.title = profile.name
         em.description = f'#{tag}'
@@ -76,6 +85,7 @@ class Profile:
 
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
+            em.add_field(name='Battle Deck', value=fmt)
 
         else:
             em.set_author(name='Profile')
