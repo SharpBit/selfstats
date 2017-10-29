@@ -62,7 +62,7 @@ class Profile:
             em.add_field(name='Legend Trophies', value=legend_trophies)
 
             em.add_field(name='Clan Name', value=clan.name)
-            em.add_field(name='Clan Tag', value=clan.tag)
+            em.add_field(name='Clan Tag', value='#' + clan.tag)
             em.add_field(name='Clan Region', value=clan.region)
             em.add_field(name='Clan Members', value=clan_members)
         else:
