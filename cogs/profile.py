@@ -43,12 +43,12 @@ class Profile:
         except:
             pass
 
-        name = profile.profile.name
-        level = str(profile.profile.level)
-        experience = str(profile.profile.experience(0)) + '/' + str(profile.profile.experience(1))
-        trophies = str(profile.profile.current_trophies)
-        highest_trophs = str(profile.profile.highest_trophies)
-        legend_trophies = str(profile.profile.legend_trophies)
+        name = profile.name
+        level = str(profile.level)
+        experience = str(profile.experience(0)) + '/' + str(profile.profile.experience(1))
+        trophies = str(profile.current_trophies)
+        highest_trophs = str(profile.highest_trophies)
+        legend_trophies = str(profile.legend_trophies)
         arena = profile.arena.name + ', Arena ' + profile.arena.number
 
         em.title = profile.name
