@@ -45,6 +45,7 @@ class Profile:
 
         name = profile.name
         level = str(profile.level)
+        experience = str(profile.experience[0]) + '/' + str(profile.profile.experience[1])
         trophies = str(profile.current_trophies)
         highest_trophs = str(profile.highest_trophies)
         legend_trophies = str(profile.legend_trophies)
@@ -56,7 +57,7 @@ class Profile:
         try:
             em.set_author(name='Profile', icon_url=clan_badge)
             em.add_field(name='Player Name', value=name)
-            em.add_field(name='Level', value=level)
+            em.add_field(name='Level', value=level + '(' + experience + ')')
             em.add_field(name='Trophies', value='Current: ' + trophies +
                          '\nHighest: ' + highest_trophs + '\nLegend: ' + legend_trophies)
             em.add_field(name='Arena', value=arena)
