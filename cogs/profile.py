@@ -68,11 +68,14 @@ class Profile:
             em.add_field(name='Total Donations', value=donations)
             em.add_field(name='Win-Loss Percentage', value=win_percent)
             em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
-            em.add_field(name='Favorite Crad', value=profile.favourite_card)
+            em.add_field(name='Favorite Card', value=profile.favourite_card)
             em.add_field(name='Game Record', value=record)
 
             em.add_field(name='Clan Info', value=clan.name +
                          '\n' + clan.tag + '\n' + profile.clan_role)
+
+            em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
+            em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
 
         else:
             em.set_author(name='Profile')
