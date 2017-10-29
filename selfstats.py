@@ -97,9 +97,11 @@ class Selfbot(commands.Bot):
         token = input('Enter your token:\n> ')
         print('------------------------------------------')
         prefix = input('Enter a prefix for your Clash Royale Stats selfbot:\n> ')
+        tag = input('Enter your Clash Royale tag:\n> ')
         data = {
             "TOKEN": token,
             "PREFIX": prefix,
+            "TAG": tag
         }
         with open('data/config.json', 'w') as f:
             f.write(json.dumps(data, indent=4))

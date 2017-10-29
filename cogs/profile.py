@@ -8,7 +8,7 @@ import io
 from ext.colors import ColorNames
 
 
-class Profile:
+class PlayerInfo:
 
     def __init__(self, bot):
         self.bot = bot
@@ -49,4 +49,4 @@ class Profile:
 
 
 def setup(bot):
-    bot.add_cog(Profile(bot))
+    bot.add_cog(PlayerInfo(bot))
