@@ -9,7 +9,7 @@ If you would like to become a *contributor*, join [the discord server](https://d
 Join the [official discord server](https://discord.gg/9NjbQCd) to contribute to selfstats.py and be the first to beta test it!
 
 ## Hosting:
-There are two ways you can host it, on a PC, or on Heroku for **free, 24/7!*
+There are two ways you can host it, on a PC, or on Heroku for **free, 24/7!**
 
 ### Installation via Heroku (recommended)
 No download is required, everything is done online. Read the installation guide [here](https://github.com/SharpBit/selfstats/wiki/Host-selfstats.py-24-7-For-Free-on-Heroku!) or watch the video tutorial(coming soon). It's possible to install the selfbot using your phone and it has been done before. If you have any questions, join the [support discord server](https://discord.gg/9NjbQCd) and we will be happy to help.
@@ -44,7 +44,7 @@ If you need to edit your token, prefix, or Clash Royale tag, navigate into the d
 - Fetch your profile, chest cycle, clan info, etc.
 - Logout, tinyurl (link shortener), dominant color command
 If you want to request features, [create an issue](https://github.com/SharpBit/selfstats/issues) on this repo.
-This is a `stateless selfbot` (Saves no data). `This means you can [host it on heroku](https://github.com/SharpBit/selfstats/wiki/Host-selfstats.py-24-7-For-Free-on-Heroku!) 24/7 for free`
+This is a `stateless selfbot` (Saves no data). *This means you can [host it on heroku](https://github.com/SharpBit/selfstats/wiki/Host-selfstats.py-24-7-For-Free-on-Heroku!) 24/7 for free*
 
 ### Acknowledgements
 The structure of the selfbot and custom context by [verixx](https://github.com/verixx) from selfbot.py
