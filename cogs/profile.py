@@ -35,7 +35,7 @@ class Profile:
             em.description = 'Either the API is down or that\'s an invalid tag.'
             return await ctx.send(embed=em)
 
-        clan = profile.get_clan()
+        clan = await profile.get_clan()
 
         if clan is not None:
             clan_name = clan.name
