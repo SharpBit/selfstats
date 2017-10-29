@@ -81,7 +81,7 @@ class Profile:
             em.add_field(name='Game Record', value=record)
 
             em.add_field(name='Clan Info', value=clan.name +
-                         '\n' + clan.tag + '\n' + profile.clan_role)
+                         '\n#' + clan.tag + '\n' + profile.clan_role)
 
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
