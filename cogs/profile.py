@@ -59,7 +59,7 @@ class Profile:
         for card in deck:
             deck_levels[card.name] = 'Lvl ' + str(card.level)
         fmt = ''
-        for key, value in deck_levels.iteritems():
+        for key, value in deck_levels.items():
             fmt += key + ': ' + value + '\n'
 
         em.title = profile.name
