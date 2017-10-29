@@ -17,8 +17,6 @@ import os
 import re
 import io
 
-TAG = 0
-
 
 class Selfbot(commands.Bot):
     '''Custom Client for selfstats.py - Made by Jason#1510'''
@@ -77,8 +75,14 @@ class Selfbot(commands.Bot):
     @property
     def tag(self):
         '''Returns your Clash Royale tag'''
-        from_heroku = os.environ.get('TAG')
-        return str(from_heroku).strip('#') if from_heroku else TAG
+        with open('data/config.json') as f:
+            config = json.load(f)
+            if config.get('TAG') == "your_tag_here":
+                if not os.environ.get('TAG'):
+                    self.run_wizard()
+            else:
+                tag = config.get('TAG').strip('#')
+        return os.environ.get('TAG') or tag
 
     @staticmethod
     async def get_pre(bot, message):
