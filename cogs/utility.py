@@ -22,7 +22,7 @@ class Utility:
 
     @commands.command()
     async def dcolor(self, ctx, *, url):
-        '''For testing to see if it works'''
+        '''A command that gets the dominant color of an image url'''
         await ctx.message.delete()
         color = await ctx.get_dominant_color(url)
         string_col = ColorNames.color_name(str(color))
@@ -37,6 +37,7 @@ class Utility:
 
     @commands.command()
     async def tinyurl(self, ctx, *, link: str):
+        '''Makes a link shorter using the tinyurl api'''
         await ctx.message.delete()
         url = 'http://tinyurl.com/api-create.php?url=' + link
         async with ctx.session.get(url) as resp:
