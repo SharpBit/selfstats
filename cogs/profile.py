@@ -36,7 +36,6 @@ class Profile:
             return await ctx.send(embed=em)
 
         clan = await profile.get_clan()
-        shop = await profile.get_shop()
 
         if profile.global_rank is not None:
             global_rank = str(profile.global_rank)
