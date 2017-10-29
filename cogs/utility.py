@@ -78,3 +78,7 @@ class Utility:
                 em_list = await embedtobox.etb(embed)
                 for page in em_list:
                     await ctx.send(page)
+
+
+def setup(bot):
+    bot.add_cog(Utility(bot))
