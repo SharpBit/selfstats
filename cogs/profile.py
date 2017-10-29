@@ -36,6 +36,7 @@ class Profile:
             return await ctx.send(embed=em)
 
         clan = await profile.get_clan()
+        shop = await profile.get_shop()
 
         if profile.global_rank is not None:
             global_rank = str(profile.global_rank)
@@ -53,8 +54,8 @@ class Profile:
         win_decimal = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}'
         win_percent = win_decimal + '%'
         record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
-        shop_offers = str(profile.shop.legendary) + 'days\n' + \
-            str(profile.shop.epic) + 'days\n' + str(profile.shop.arena) + 'days'
+        shop_offers = str(shop.legendary) + 'days\n' + \
+            str(shop.epic) + 'days\n' + str(shop.arena) + 'days'
 
         deck = profile.deck
         deck_levels = {}
