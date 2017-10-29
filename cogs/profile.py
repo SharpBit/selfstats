@@ -110,7 +110,7 @@ class Profile:
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
             em.add_field(name='Battle Deck', value=fmt)
 
-            em.set_thumbnail(url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+            em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
                           icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
