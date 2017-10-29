@@ -38,11 +38,8 @@ class Profile:
         clan = await profile.get_clan()
 
         if clan.name is not None:
-            clan_name = clan.name
             clan_badge = clan.badge_url
-            clan_region = clan.region
             clan_members = str(len(clan.members)) + '/50'
-            clan_tag = clan.get('tag')
 
         level = str(profile.level)
         experience = str(profile.experience[0]) + '/' + str(profile.experience[1])
@@ -64,9 +61,9 @@ class Profile:
             em.add_field(name='Highest Trophies', value=highest_trophies)
             em.add_field(name='Legend Trophies', value=legend_trophies)
 
-            em.add_field(name='Clan Name', value=clan_name)
-            em.add_field(name='Clan Tag', value=clan_tag)
-            em.add_field(name='Clan Region', value=clan_region)
+            em.add_field(name='Clan Name', value=clan.name)
+            em.add_field(name='Clan Tag', value=clan.tag)
+            em.add_field(name='Clan Region', value=clan.region)
             em.add_field(name='Clan Members', value=clan_members)
         else:
             em.set_author(name='Profile')
