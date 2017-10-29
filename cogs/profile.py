@@ -35,11 +35,13 @@ class Profile:
             em.description = 'Either the API is down or that\'s an invalid tag.'
             return await ctx.send(embed=em)
 
-        if profile.clan is not None:
-            clan_name = profile.clan.name
-            clan_badge = profile.clan_badge_url
-            clan_region = profile.clan.region
-            clan_members = str(len(profile.clan.members)) + '/50'
+        clan = profile.get_clan()
+
+        if clan is not None:
+            clan_name = clan.name
+            clan_badge = clan.badge_url
+            clan_region = clan.region
+            clan_members = str(len(clan.members)) + '/50'
 
         name = profile.name
         level = str(profile.level)
@@ -52,7 +54,7 @@ class Profile:
         em.title = profile.name
         em.description = f'#{tag}'
         em.url = f'http://cr-api.com/profile/{tag}'
-        if profile.clan is not None:
+        if clan is not None:
             em.set_author(name='Profile', icon_url=clan_badge)
             em.add_field(name='Level', value=level)
             em.add_field(name='Experience', value=experience)
