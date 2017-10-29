@@ -37,10 +37,6 @@ class Profile:
 
         clan = await profile.get_clan()
 
-        if clan.name is not None:
-            clan_badge = clan.badge_url
-            clan_members = str(len(clan.members)) + '/50'
-
         if profile.global_rank is not None:
             global_rank = str(profile.global_rank)
         else:
@@ -53,14 +49,15 @@ class Profile:
         legend_trophies = str(profile.legend_trophies)
         arena = profile.arena.name + ' | Arena ' + str(profile.arena.number)
         donations = str(profile.total_donations)
-        win_percent = str((profile.wins / (profile.wins + profile.losses)) * 100) + '%'
+        win_decimal = f'{profile.wins / (profile.wins + profile.losses):.3f}'
+        win_percent = win_decimal + '%'
         record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
 
         em.title = profile.name
         em.description = f'#{tag}'
         em.url = f'http://cr-api.com/profile/{tag}'
         if clan.name is not None:
-            em.set_author(name='Profile', icon_url=clan_badge)
+            em.set_author(name='Profile', icon_url=clan.badge_url)
 
             em.add_field(name='Level', value=level + '(' + experience + ')')
             em.add_field(name='Arena', value=arena)
