@@ -41,30 +41,41 @@ class Profile:
             clan_badge = clan.badge_url
             clan_members = str(len(clan.members)) + '/50'
 
+        if profile.global_rank is not None:
+            global_rank = str(profile.global_rank)
+        else:
+            global_rank = 'N/A'
+
         level = str(profile.level)
         experience = str(profile.experience[0]) + '/' + str(profile.experience[1])
         trophies = str(profile.current_trophies)
         highest_trophies = str(profile.highest_trophies)
         legend_trophies = str(profile.legend_trophies)
         arena = profile.arena.name + ' | Arena ' + str(profile.arena.number)
+        donations = str(profile.total_donations)
+        win_percent = str((profile.wins / (profile.wins + profile.losses)) * 100) + '%'
+        record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
 
         em.title = profile.name
         em.description = f'#{tag}'
         em.url = f'http://cr-api.com/profile/{tag}'
         if clan.name is not None:
             em.set_author(name='Profile', icon_url=clan_badge)
-            em.add_field(name='Level', value=level)
-            em.add_field(name='Experience', value=experience)
+
+            em.add_field(name='Level', value=level + '(' + experience + ')')
             em.add_field(name='Arena', value=arena)
 
-            em.add_field(name='Current Trophies', value=trophies)
-            em.add_field(name='Highest Trophies', value=highest_trophies)
-            em.add_field(name='Legend Trophies', value=legend_trophies)
+            em.add_field(name='Trophies', value=trophies)
+            em.add_field(name='Personal Best', value=highest_trophies)
+            em.add_field(name='Global Rank', value=global_rank)
+            em.add_field(name='Total Donations', value=donations)
+            em.add_field(name='Win-Loss Percentage', value=win_percent)
+            em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
+            em.add_field(name='Game Record', value=record)
 
-            em.add_field(name='Clan Name', value=clan.name)
-            em.add_field(name='Clan Tag', value='#' + clan.tag)
-            em.add_field(name='Clan Region', value=clan.region)
-            em.add_field(name='Clan Members', value=clan_members)
+            em.add_field(name='Clan Info', value=clan.name +
+                         '\n' + clan.tag + '\n' + profile.clan_role)
+
         else:
             em.set_author(name='Profile')
             em.add_field(name='Level', value=level)
