@@ -49,7 +49,7 @@ class Profile:
         legend_trophies = str(profile.legend_trophies)
         arena = profile.arena.name + ' | Arena ' + str(profile.arena.number)
         donations = str(profile.total_donations)
-        win_decimal = f'{profile.wins / (profile.wins + profile.losses):.3f}'
+        win_decimal = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}'
         win_percent = win_decimal + '%'
         record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
 
@@ -68,6 +68,7 @@ class Profile:
             em.add_field(name='Total Donations', value=donations)
             em.add_field(name='Win-Loss Percentage', value=win_percent)
             em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
+            em.add_field(name='Favorite Crad', value=profile.favourite_card)
             em.add_field(name='Game Record', value=record)
 
             em.add_field(name='Clan Info', value=clan.name +
