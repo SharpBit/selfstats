@@ -47,21 +47,6 @@ class Profile:
 
         await ctx.send(embed=em)
 
-    @commands.command(aliases=['dc', 'dominant_color'])
-    async def dcolor(self, ctx, *, url):
-        '''Fun command that shows the dominant color of an image'''
-        await ctx.message.delete()
-        color = await ctx.get_dominant_color(url)
-        string_col = ColorNames.color_name(str(color))
-        info = f'`{str(color)}`\n`{color.to_rgb()}`\n`{str(string_col)}`'
-        em = discord.Embed(color=color, title='Dominant Color', description=info)
-        em.set_thumbnail(url=url)
-        file = io.BytesIO()
-        Image.new('RGB', (200, 90), color.to_rgb()).save(file, format='PNG')
-        file.seek(0)
-        em.set_image(url="attachment://color.png")
-        await ctx.send(file=discord.File(file, 'color.png'), embed=em)
-
 
 def setup(bot):
     bot.add_cog(Profile(bot))
