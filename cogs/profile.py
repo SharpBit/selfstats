@@ -87,17 +87,32 @@ class Profile:
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
             em.add_field(name='Battle Deck', value=fmt)
 
+            em.set_thumbnail(url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+            em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
+                          icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+
         else:
             em.set_author(name='Profile')
-            em.add_field(name='Level', value=level)
-            em.add_field(name='Experience', value=experience)
+            em.add_field(name='Level', value=level + '(' + experience + ')')
             em.add_field(name='Arena', value=arena)
 
-            em.add_field(name='Current Trophies', value=trophies)
-            em.add_field(name='Highest Trophies', value=highest_trophies)
-            em.add_field(name='Legend Trophies', value=legend_trophies)
+            em.add_field(name='Trophies', value=trophies)
+            em.add_field(name='Personal Best', value=highest_trophies)
+            em.add_field(name='Global Rank', value=global_rank)
+            em.add_field(name='Total Donations', value=donations)
+            em.add_field(name='Win-Loss Percentage', value=win_percent)
+            em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
+            em.add_field(name='Favorite Card', value=profile.favourite_card)
+            em.add_field(name='Game Record', value=record)
 
-            em.add_field(name='Clan', value='No clan')
+            em.add_field(name='Clan Info', value='No clan')
+            em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
+            em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
+            em.add_field(name='Battle Deck', value=fmt)
+
+            em.set_thumbnail(url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+            em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
+                          icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
         await ctx.send(embed=em)
 
