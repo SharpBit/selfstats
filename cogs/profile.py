@@ -53,8 +53,6 @@ class Profile:
         win_decimal = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}'
         win_percent = win_decimal + '%'
         record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
-        shop_offers = str(shop.legendary) + 'days\n' + \
-            str(shop.epic) + 'days\n' + str(shop.arena) + 'days'
 
         deck = profile.deck
         deck_levels = {}
@@ -88,9 +86,8 @@ class Profile:
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
             em.add_field(name='Battle Deck', value=fmt)
-            em.add_filed(name='Shop Offers', value=shop_offers)
 
-            em.set_thumbnail(url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+            em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
                           icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
