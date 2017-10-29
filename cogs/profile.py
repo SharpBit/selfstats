@@ -45,11 +45,11 @@ class Profile:
 
         name = profile.name
         level = str(profile.level)
-        experience = str(profile.experience[0]) + '/' + str(profile.profile.experience[1])
+        experience = str(profile.experience[0]) + '/' + str(profile.experience[1])
         trophies = str(profile.current_trophies)
         highest_trophs = str(profile.highest_trophies)
         legend_trophies = str(profile.legend_trophies)
-        arena = profile.arena.name + ', Arena ' + profile.arena.number
+        arena = profile.arena.name + ', Arena ' + str(profile.arena.number)
 
         em.title = profile.name
         em.description = f'#{tag}'
