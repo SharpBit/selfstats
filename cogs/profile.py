@@ -41,7 +41,6 @@ class Profile:
         except ValueError:
             pass
 
-        shop = profile.get_shop()
         cycle = profile.chest_cycle
 
         if profile.global_rank is not None:
