@@ -133,12 +133,18 @@ class Profile:
             em.description = 'Either the API is down or that\'s an invalid tag.'
             return await ctx.send(embed=em)
 
-        em.description = 'Trophies: ' + str(profile.current_trophies) + '\nPersonal Best: ' + str(
-            profile.highest_trophies) + '\nLegend Trophies: ' + str(profile.legend_trophies)
+        trophies = str(profile.current_trophies)
+        highest_trophies = str(profile.highest_trophies)
+        legend_trophies = str(profile.legend_trophies)
+
+        em.description = 'Trophies: ' + trophies + '\nPersonal Best: ' + \
+            highest_trophies + '\nLegend Trophies: ' + legend_trophies
         em.set_thumbnail(
             url='http://vignette1.wikia.nocookie.net/clashroyale/images/7/7c/LegendTrophy.png/revision/latest?cb=20160305151655')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
                       icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+
+        await ctx.send(embed=em)
 
 
 def setup(bot):
