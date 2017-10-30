@@ -18,8 +18,6 @@ class Profile:
                 tag = config['TAG']
         self.tag = os.environ.get('TAG') or tag
         self.client = crasync.Client()
-        with open('data/images/general.json') as f:
-            images = json.load(f)
 
     @commands.command()
     async def profile(self, ctx, tag=None):
