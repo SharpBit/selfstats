@@ -41,17 +41,17 @@ class Profile:
         except ValueError:
             pass
 
-        cycle = profile.chest_cycle
+        #cycle = profile.chest_cycle
 
         if profile.global_rank is not None:
             global_rank = str(profile.global_rank)
         else:
             global_rank = 'N/A'
 
-        chest_cycle = ',\n'.join([profile.get_chest(x) for x in range(10)])
-        sm = str(cycle.super_magical)
-        legend = str(cycle.legendary)
-        epic = str(cycle.epic)
+        #chest_cycle = ',\n'.join([profile.get_chest(x) for x in range(10)])
+        #sm = str(cycle.super_magical)
+        #legend = str(cycle.legendary)
+        #epic = str(cycle.epic)
 
         level = str(profile.level)
         experience = str(profile.experience[0]) + '/' + str(profile.experience[1])
@@ -99,8 +99,8 @@ class Profile:
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
             em.add_field(name='Battle Deck', value=fmt)
-            em.add_field(name='Chests', value=chest_cycle + '\nSuper Magical: ' +
-                         sm + '\nLegendary: ' + legend + '\nEpic: ' + epic)
+            # em.add_field(name='Chests', value=chest_cycle + '\nSuper Magical: ' +
+            # sm + '\nLegendary: ' + legend + '\nEpic: ' + epic)
 
             em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
@@ -125,8 +125,8 @@ class Profile:
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
             em.add_field(name='Battle Deck', value=fmt)
-            em.add_field(name='Chests', value=chest_cycle + '\nSuper Magical: ' +
-                         sm + '\nLegendary: ' + legend + '\nEpic: ' + epic)
+            # em.add_field(name='Chests', value=chest_cycle + '\nSuper Magical: ' +
+            # sm + '\nLegendary: ' + legend + '\nEpic: ' + epic)
 
             em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
