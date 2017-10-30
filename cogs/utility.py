@@ -49,11 +49,12 @@ class Utility:
         await ctx.send(embed=emb)
 
     @commands.command()
-    async def hastebin(self, ctx, code):
+    async def hastebin(self, ctx, *, code):
         '''Hastebin-ify your code!'''
         async with ctx.session.post("https://hastebin.com/documents", data=code) as resp:
             data = await resp.json()
-        await ctx.message.edit(content=f"Hastebin-ified! <https://hastebin.com/{data['key']}.py>")
+            key = data['key']
+        await ctx.message.edit(content=f"Hastebin-ified! <https://hastebin.com/{key}.py>")
 
     @commands.command()
     async def source(self, ctx, *, command):
