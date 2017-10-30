@@ -36,12 +36,23 @@ class Profile:
             em.description = 'Either the API is down or that\'s an invalid tag.'
             return await ctx.send(embed=em)
 
-        clan = await profile.get_clan()
+        try:
+            clan = await profile.get_clan()
+        except ValueError:
+            pass
+
+        shop = profile.get_shop()
+        cycle = profile.chest_cycle
 
         if profile.global_rank is not None:
             global_rank = str(profile.global_rank)
         else:
             global_rank = 'N/A'
+
+        chest_cycle = ',\n'.join([profile.get_chest(x) for x in range(10)])
+        sm = str(cycle.super_magical)
+        legend = str(cycle.legendary)
+        epic = str(cycle.epic)
 
         level = str(profile.level)
         experience = str(profile.experience[0]) + '/' + str(profile.experience[1])
@@ -49,6 +60,7 @@ class Profile:
         highest_trophies = str(profile.highest_trophies)
         legend_trophies = str(profile.legend_trophies)
         arena = profile.arena.name + ' | Arena ' + str(profile.arena.number)
+        win_streak = str(profile.win_streak)
 
         donations = str(profile.total_donations)
         win_decimal = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}'
@@ -80,6 +92,7 @@ class Profile:
             em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
             em.add_field(name='Favorite Card', value=profile.favourite_card)
             em.add_field(name='Game Record', value=record)
+            em.add_field(name='Win Streak', value=win_streak)
 
             em.add_field(name='Clan Info', value=clan.name +
                          '\n#' + clan.tag + '\n' + profile.clan_role)
@@ -87,6 +100,8 @@ class Profile:
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
             em.add_field(name='Battle Deck', value=fmt)
+            em.add_field(name='Chests', value=chest_cycle + '\nSuper Magical: ' +
+                         sm + '\nLegendary: ' + legend + '\nEpic: ' + epic)
 
             em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
@@ -105,11 +120,14 @@ class Profile:
             em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
             em.add_field(name='Favorite Card', value=profile.favourite_card)
             em.add_field(name='Game Record', value=record)
+            em.add_field(name='Win Streak', value=win_streak)
 
             em.add_field(name='Clan Info', value='No clan')
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
             em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
             em.add_field(name='Battle Deck', value=fmt)
+            em.add_field(name='Chests', value=chest_cycle + '\nSuper Magical: ' +
+                         sm + '\nLegendary: ' + legend + '\nEpic: ' + epic)
 
             em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
