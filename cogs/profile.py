@@ -164,9 +164,9 @@ class Profile:
             em.description = 'Either the API is down or that\'s an invalid tag.'
             return await ctx.send(embed=em)
 
-        em.url = 'http://cr-api.com/profile/{tag}'
+        em.url = f'http://cr-api.com/profile/{tag}'
         em.title = profile.name
-        em.add_field(name='URL', value='http://cr-api.com/profile/{tag}')
+        em.add_field(name='URL', value=f'http://cr-api.com/profile/{tag}')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
                       icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
