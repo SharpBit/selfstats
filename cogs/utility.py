@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from ext.colors import ColorNames
 from PIL import Image
+import inspect
 import io
 
 
@@ -53,6 +54,19 @@ class Utility:
         async with ctx.session.post("https://hastebin.com/documents", data=code) as resp:
             data = await resp.json()
         await ctx.message.edit(content=f"Hastebin-ified! <https://hastebin.com/{data['key']}.py>")
+
+    @commands.command()
+    async def source(self, ctx, *, command):
+        '''See the source code for any command.'''
+        source = str(inspect.getsource(self.bot.get_command(command).callback))
+        fmt = '```py\n' + source.replace('`', '\u200b`') + '\n```'
+        if len(fmt) > 2000:
+            async with ctx.session.post("https://hastebin.com/documents", data=source) as resp:
+                data = await resp.json()
+            key = data['key']
+            return await ctx.send(f'Command source: <https://hastebin.com/{key}.py>')
+        else:
+            return await ctx.send(fmt)
 
 
 def setup(bot):
