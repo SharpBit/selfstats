@@ -18,6 +18,8 @@ class Profile:
                 tag = config['TAG']
         self.tag = os.environ.get('TAG') or tag
         self.client = crasync.Client()
+        with open('data/images/general.json') as f:
+            images = json.load(f)
 
     @commands.command()
     async def profile(self, ctx, tag=None):
@@ -90,7 +92,7 @@ class Profile:
 
             em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                          icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+                          icon_url=self.images.get('CR-API'))
 
         else:
             em.set_author(name='Profile')
@@ -113,7 +115,7 @@ class Profile:
 
             em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                          icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+                          icon_url=self.images.get('CR-API'))
 
         await ctx.send(embed=em)
 
@@ -141,10 +143,9 @@ class Profile:
         em.set_author(name='Trophies', icon_url=profile.arena.image_url)
         em.description = 'Trophies: `' + trophies + '`\nPersonal Best: `' + \
             highest_trophies + '`\nLegend Trophies: `' + legend_trophies + '`'
-        em.set_thumbnail(
-            url='http://vignette1.wikia.nocookie.net/clashroyale/images/7/7c/LegendTrophy.png/revision/latest?cb=20160305151655')
+        em.set_thumbnail(url=self.images.get('LEGEND_TROPHY'))
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+                      icon_url=self.images.get('CR-API'))
 
         await ctx.send(embed=em)
 
@@ -168,7 +169,7 @@ class Profile:
         em.title = profile.name
         em.add_field(name='URL', value=f'http://cr-api.com/profile/{tag}')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+                      icon_url=self.images.get('CR-API'))
 
         await ctx.send(embed=em)
 
