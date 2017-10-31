@@ -55,3 +55,4 @@ This is a `stateless selfbot` (Saves no data). *This means you can [host it on h
 
 ### Acknowledgements
 The structure of the selfbot and custom context by [verixx](https://github.com/verixx) from selfbot.py
+Footer by [kwugfighter](https; ://github.com/kwugfighter)
