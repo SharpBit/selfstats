@@ -7,9 +7,12 @@ import os
 
 
 class Profile:
+    '''Get info about your Profile'''
 
     def __init__(self, bot):
         self.bot = bot
+        with open('data/images/general.json') as f:
+            self.images = json.load(f)
         with open('data/config.json') as f:
             config = json.load(f)
             if 'TAG' not in config:
@@ -59,7 +62,7 @@ class Profile:
         highest_trophies = str(profile.highest_trophies)
         legend_trophies = str(profile.legend_trophies)
         arena = profile.arena.name + ' | Arena ' + str(profile.arena.number)
-        win_streak = str(profile.win_streak)
+        #win_streak = str(profile.win_streak)
 
         donations = str(profile.total_donations)
         win_decimal = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}'
@@ -91,7 +94,7 @@ class Profile:
             em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
             em.add_field(name='Favorite Card', value=profile.favourite_card)
             em.add_field(name='Game Record', value=record)
-            em.add_field(name='Win Streak', value=win_streak)
+            #em.add_field(name='Win Streak', value=win_streak)
 
             em.add_field(name='Clan Info', value=clan.name +
                          '\n#' + clan.tag + '\n' + profile.clan_role)
@@ -104,7 +107,7 @@ class Profile:
 
             em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                          icon_url="http://cr-api.com/static/img/branding/cr-api-logo.png")
+                          icon_url=self.images['CR-API'])
 
         else:
             em.set_author(name='Profile')
@@ -119,7 +122,7 @@ class Profile:
             em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
             em.add_field(name='Favorite Card', value=profile.favourite_card)
             em.add_field(name='Game Record', value=record)
-            em.add_field(name='Win Streak', value=win_streak)
+            #em.add_field(name='Win Streak', value=win_streak)
 
             em.add_field(name='Clan Info', value='No clan')
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
@@ -130,7 +133,7 @@ class Profile:
 
             em.set_thumbnail(url=profile.arena.image_url)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                          icon_url="http://cr-api.com/static/img/branding/cr-api-logo.png")
+                          icon_url=self.images['CR-API'])
 
         await ctx.send(embed=em)
 
@@ -158,10 +161,9 @@ class Profile:
         em.set_author(name='Trophies', icon_url=profile.arena.image_url)
         em.description = 'Trophies: `' + trophies + '`\nPersonal Best: `' + \
             highest_trophies + '`\nLegend Trophies: `' + legend_trophies + '`'
-        em.set_thumbnail(
-            url="http://vignette1.wikia.nocookie.net/clashroyale/images/7/7c/LegendTrophy.png/revision/latest?cb=20160305151655")
+        em.set_thumbnail(url=self.images['LEGEND_TROPHY'])
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url="http://cr-api.com/static/img/branding/cr-api-logo.png")
+                      icon_url=self.images['CR-API'])
 
         await ctx.send(embed=em)
 
@@ -185,7 +187,7 @@ class Profile:
         em.title = profile.name
         em.add_field(name='URL', value=f'http://cr-api.com/profile/{tag}')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url="http://cr-api.com/static/img/branding/cr-api-logo.png")
+                      icon_url=images['CR-API'])
 
         await ctx.send(embed=em)
 
