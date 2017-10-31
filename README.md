@@ -41,8 +41,15 @@ If you need to edit your token, prefix, or Clash Royale tag, navigate into the d
 ```
 
 ### Features
-- Fetch your profile, chest cycle, clan info, etc.
-- Logout, tinyurl (link shortener), dominant color command
+- [x] Fetch your profile, chest cycle, clan info, etc.
+- [ ] View more detailed info about your clan
+- [x] Individually get your trophies (current, best, legend)
+- [x] Find out how much longer until you get that super magical chest
+- [x] Find your next 9 chests!
+- [ ] Clan Chest Info
+- [x] Find out when your next shop offer is
+- [x] Custom Prefix
+- [x] Logout, tinyurl (link shortener), dominant color command, put code into a hastebin, get the source code for a command
 If you want to request features, [create an issue](https://github.com/SharpBit/selfstats/issues) on this repo.
 This is a `stateless selfbot` (Saves no data). *This means you can [host it on heroku](https://github.com/SharpBit/selfstats/wiki/Host-selfstats.py-24-7-For-Free-on-Heroku!) 24/7 for free*
 

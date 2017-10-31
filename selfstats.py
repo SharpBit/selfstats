@@ -150,7 +150,7 @@ class Selfbot(commands.Bot):
         self.commands_used[cmd] += 1
 
     async def process_commands(self, message):
-        '''Utilizes the CustomContext subc;ass of discord.Content'''
+        '''Utilizes the CustomContext subclass of discord.Content'''
         ctx = await self.get_context(message, cls=CustomContext)
         if ctx.command is None:
             return
