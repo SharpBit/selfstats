@@ -187,7 +187,7 @@ class Profile:
         em.title = profile.name
         em.add_field(name='URL', value=f'http://cr-api.com/profile/{tag}')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url=images['CR-API'])
+                      icon_url=self.images['CR-API'])
 
         await ctx.send(embed=em)
 
