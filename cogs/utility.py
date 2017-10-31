@@ -30,6 +30,8 @@ class Utility:
         info = f'`{str(color)}`\n`{color.to_rgb()}`\n`{str(string_col)}`'
         em = discord.Embed(color=color, title='Dominant Color', description=info)
         em.set_thumbnail(url=url)
+        em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
+                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
         file = io.BytesIO()
         Image.new('RGB', (200, 90), color.to_rgb()).save(file, format='PNG')
         file.seek(0)
@@ -46,6 +48,8 @@ class Utility:
         emb = discord.Embed(color=await ctx.get_dominant_color(ctx.author.avatar_url))
         emb.add_field(name="Original Link", value=link, inline=False)
         emb.add_field(name="Shortened Link", value=new, inline=False)
+        emb.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
+                       icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
         await ctx.send(embed=emb)
 
     @commands.command()
