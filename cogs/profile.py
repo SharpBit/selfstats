@@ -60,7 +60,7 @@ class Profile:
         highest_trophies = str(profile.highest_trophies)
         legend_trophies = str(profile.legend_trophies)
         arena = profile.arena.name + ' | Arena ' + str(profile.arena.number)
-        #win_streak = str(profile.win_streak)
+        win_streak = str(profile.win_streak)
 
         donations = str(profile.total_donations)
         win_decimal = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}'
@@ -92,7 +92,7 @@ class Profile:
             em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
             em.add_field(name='Favorite Card', value=profile.favourite_card)
             em.add_field(name='Game Record', value=record)
-            #em.add_field(name='Win Streak', value=win_streak)
+            em.add_field(name='Win Streak', value=win_streak)
 
             em.add_field(name='Clan Info', value=clan.name +
                          '\n#' + clan.tag + '\n' + profile.clan_role)
@@ -120,7 +120,7 @@ class Profile:
             em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
             em.add_field(name='Favorite Card', value=profile.favourite_card)
             em.add_field(name='Game Record', value=record)
-            #em.add_field(name='Win Streak', value=win_streak)
+            em.add_field(name='Win Streak', value=win_streak)
 
             em.add_field(name='Clan Info', value='No clan')
             em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
