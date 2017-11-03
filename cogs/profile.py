@@ -49,7 +49,7 @@ class Profile:
         else:
             global_rank = 'N/A'
 
-        chest_cycle = ',\n'.join([profile.get_chest(x) for x in range(10)])
+        cycle = ',\n'.join([profile.get_chest(x) for x in range(10)])
         sm = str(cycle.super_magical)
         legend = str(cycle.legendary)
         epic = str(cycle.epic)
