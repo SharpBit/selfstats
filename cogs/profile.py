@@ -106,7 +106,7 @@ class Profile:
         em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
         em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
         em.add_field(name='Battle Deck', value=fmt)
-        em.add_field(name='Chests', value=chest_cycle + '\nSuper Magical: ' +
+        em.add_field(name='Chests', value=cycle + '\nSuper Magical: ' +
                      sm + '\nLegendary: ' + legend + '\nEpic: ' + epic)
 
         em.set_thumbnail(url=profile.arena.image_url)
