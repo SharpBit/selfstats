@@ -78,7 +78,7 @@ class Selfbot(commands.Bot):
                 if not os.environ.get('TAG'):
                     self.run_wizard()
             else:
-                tag = config.get('TAG').strip('#')
+                tag = config.get('TAG').strip('#').replace('O', '0')
         return os.environ.get('TAG') or tag
 
     @staticmethod
