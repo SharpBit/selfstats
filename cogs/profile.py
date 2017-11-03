@@ -135,7 +135,7 @@ class Profile:
 
         em.title = profile.name
         em.set_author(name='Trophies', icon_url=profile.arena.image_url)
-        em.description = 'Trophies: `' + trophies + '`\nPersonal Best: `' +
+        em.description = 'Trophies: `' + trophies + '`\nPersonal Best: `' + \
             highest_trophies + '`\nLegend Trophies: `' + legend_trophies + '`'
         em.set_thumbnail(
             url='http://vignette1.wikia.nocookie.net/clashroyale/images/7/7c/LegendTrophy.png/revision/latest?cb=20160305151655')
