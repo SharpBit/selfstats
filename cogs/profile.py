@@ -62,8 +62,7 @@ class Profile:
         win_streak = str(profile.win_streak)
 
         donations = str(profile.total_donations)
-        win_decimal = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}'
-        win_percent = win_decimal + '%'
+        win_percent = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f} %'
         record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
 
         deck = profile.deck
