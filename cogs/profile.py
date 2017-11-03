@@ -50,9 +50,10 @@ class Profile:
             global_rank = 'N/A'
 
         cycle = ',\n'.join([profile.get_chest(x) for x in range(10)])
-        sm = str(cycle.super_magical)
-        legend = str(cycle.legendary)
-        epic = str(cycle.epic)
+        c = profile.chest_cycle
+        sm = str(c.super_magical)
+        legend = str(c.legendary)
+        epic = str(c.epic)
 
         level = str(profile.level)
         experience = str(profile.experience[0]) + '/' + str(profile.experience[1])
