@@ -76,7 +76,7 @@ class Profile:
         em.title = profile.name
         em.description = f'#{tag}'
         em.url = f'http://cr-api.com/profile/{tag}'
-        if clan.name is not None:
+        if clan is not None:
             em.set_author(name='Profile', icon_url=clan.badge_url)
         else:
             em.set_author(name='Profile', icon_url='https://i.imgur.com/Y3uXsgj.png')
@@ -93,7 +93,7 @@ class Profile:
         em.add_field(name='Favorite Card', value=profile.favourite_card)
         em.add_field(name='Game Record (Win Streak)', value=record + '(' + win_streak + ')')
 
-        if clan.name is not None:
+        if clan is not None:
             em.add_field(name='Clan Info', value=clan.name +
                          '\n#' + clan.tag + '\n' + profile.clan_role)
         else:
