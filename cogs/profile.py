@@ -20,7 +20,12 @@ class Profile:
         self.tag = os.environ.get('TAG') or tag
         self.client = crasync.Client()
 
-    def load_profile(self, ctx, tag=None):
+    @commands.command()
+    async def profile(self, ctx, tag=None):
+        '''Fetch a Clash Royale Profile'''
+        em = discord.Embed(title='Profile')
+        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+
         if tag is None:
             tag = self.tag
             if tag is None:
@@ -31,16 +36,6 @@ class Profile:
         except:
             em.description = 'Either the API is down or that\'s an invalid tag.'
             return await ctx.send(embed=em)
-
-        return profile
-
-    @commands.command()
-    async def profile(self, ctx, tag=None):
-        '''Fetch a Clash Royale Profile'''
-        em = discord.Embed(title='Profile')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
-
-        self.load_profile(ctx, tag)
 
         try:
             clan = await profile.get_clan()
@@ -121,7 +116,16 @@ class Profile:
         em = discord.Embed(title='Trophies')
         em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
 
-        self.load_profile(ctx, tag)
+        if tag is None:
+            tag = self.tag
+            if tag is None:
+                em.description - 'Please add `TAG` to your config.'
+                return await ctx.send(embed=em)
+        try:
+            profile = await self.client.get_profile(tag)
+        except:
+            em.description = 'Either the API is down or that\'s an invalid tag.'
+            return await ctx.send(embed=em)
 
         trophies = str(profile.current_trophies)
         highest_trophies = str(profile.highest_trophies)
@@ -145,7 +149,16 @@ class Profile:
         em = discord.Embed(title='Battle Deck')
         em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
 
-        self.load_profile(ctx, tag)
+        if tag is None:
+            tag = self.tag
+            if tag is None:
+                em.description - 'Please add `TAG` to your config.'
+                return await ctx.send(embed=em)
+        try:
+            profile = await self.client.get_profile(tag)
+        except:
+            em.description = 'Either the API is down or that\'s an invalid tag.'
+            return await ctx.send(embed=em)
 
         deck = profile.deck
         deck_levels = {}
