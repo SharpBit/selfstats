@@ -45,7 +45,7 @@ class Profile:
         if profile.global_rank is not None:
             global_rank = str(profile.global_rank)
         else:
-            global_rank = 'N/A'
+            global_rank = 'Unranked'
 
         # cycle = ',\n'.join([profile.get_chest(x) for x in range(10)])
         # c = profile.chest_cycle
