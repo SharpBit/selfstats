@@ -33,17 +33,18 @@ class Clan:
             try:
                 profile = await self.client.get_profile(tag)
             except:
-                em.description = 'Either the API is down or your tag an invalid player tag.'
+                em.description = 'Either the API is down or your tag is an invalid player tag.'
                 return await ctx.send(embed=em)
         else:
             clan = await self.client.get_clan(clan_tag)
 
-        if profile:
-            try:
-                clan = await profile.get_clan()
-            except ValueError:
-                em.description = 'You are not in a clan'
-                return await ctx.send(embed=em)
+        try:
+            clan = await profile.get_clan()
+        except ValueError:
+            em.description = 'You are not in a clan'
+            return await ctx.send(embed=em)
+        except Exception as e:
+            return await ctx.send(f'```{e}```')
 
         if clan.rank == 0:
             rank = 'Unranked'
