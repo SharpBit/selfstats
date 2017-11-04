@@ -44,6 +44,7 @@ class Clan:
             em.description = 'You are not in a clan'
             return await ctx.send(embed=em)
         except Exception as e:
+            print(f'{e}')
             return await ctx.send(f'```{e}```')
 
         if clan.rank == 0:
