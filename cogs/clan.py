@@ -31,7 +31,7 @@ class Clan:
                 em.description - 'Please add `TAG` to your config.'
                 return await ctx.send(embed=em)
             try:
-                self.profile = await self.client.get_profile(tag)
+                profile = await self.client.get_profile(tag)
             except:
                 em.description = 'Either the API is down or your tag is an invalid player tag.'
                 return await ctx.send(embed=em)
@@ -40,10 +40,12 @@ class Clan:
             clan = await self.client.get_clan(clan_tag)
 
         try:
-            clan = await self.profile.get_clan()
+            clan = await profile.get_clan()
         except ValueError:
             em.description = 'You are not in a clan'
             return await ctx.send(embed=em)
+        except Exception as e:
+            return await ctx.send(f'```{e}```')
 
         if clan.rank == 0:
             rank = 'Unranked'
