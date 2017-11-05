@@ -45,7 +45,7 @@ class Cards:
         em.description = found_card.description
         em.add_field(name='Rarity', value=found_card.rarity)
         em.add_field(name='Type', value=found_card.type)
-        em.add_field(name='Arena', value=Arena ' + str(found_card.arena))
+        em.add_field(name='Arena', value='Arena ' + str(found_card.arena))
         em.add_field(name='Cost', value='{card.elixir} elixir')
 
         em.set_thumbnail(url='attachment://card.png')
