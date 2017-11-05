@@ -53,10 +53,10 @@ class Clan:
             rank = str(clan.rank)
 
         chest = str(clan.clan_chest.crowns) + '/' + str(clan.clan_chest.required) + \
-            '(' + str(100 - clan.clan_chest.percent) + '%)'
+            ' (' + str(100 - clan.clan_chest.percent) + '%)'
         members = str(len(clan.members)) + '/50'
 
-        em.title = clan.name + '(#' + clan.tag + ')'
+        em.title = clan.name + ' (#' + clan.tag + ')'
         em.set_author(name='Clan Info', icon_url=ctx.author.avatar_url)
         em.description = clan.description
 
