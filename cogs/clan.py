@@ -52,6 +52,9 @@ class Clan:
         else:
             rank = str(clan.rank)
 
+        chest = str(clan.clan_chest.crowns) + '/' + str(clan.clan_chest.required)
+        members = str(len(clan.members)) + '/50'
+
         em.title = clan.name + '(#' + clan.tag + ')'
         em.set_author(name='Clan Info', icon_url=ctx.author.avatar_url)
         em.description = clan.description
@@ -62,6 +65,8 @@ class Clan:
         em.add_field(name='Region', value=clan.region)
         em.add_field(name='Global Rank', value=rank)
         em.add_field(name='Type', value=clan.type_name)
+        em.add_field(name='Clan Chest', value=chest)
+        em.add_field(name='Members', value=members)
 
         em.set_thumbnail(url=clan.badge_url)
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
