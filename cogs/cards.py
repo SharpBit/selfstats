@@ -40,7 +40,7 @@ class Cards:
             return await ctx.send('That\'s not a card.')
 
         color = await ctx.get_dominant_color(ctx.author.avatar_url)
-        em = discord.Embed(title=found_card.title(), color=color)
+        em = discord.Embed(title=card.title(), color=color)
         em.set_author(name='Card Info', icon_url=ctx.author.avatar_url)
         em.description = found_card.description
         em.add_field(name='Rarity', value=found_card.rarity)
