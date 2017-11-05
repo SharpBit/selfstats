@@ -29,6 +29,7 @@ class Selfbot(commands.Bot):
     def __init__(self, **attrs):
         super().__init__(command_prefix=self.get_pre, self_bot=True)
         self.session = aiohttp.ClientSession(loop=self.loop)
+        self.cr = crasync.Client(self.session)
         self.process = psutil.Process()
         self._extensions = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
         self.last_message = None
@@ -143,6 +144,7 @@ class Selfbot(commands.Bot):
         ---------------
         '''))
 
+        self.constants = await self.cr.get_constants()
         await self.change_presence(status=discord.Status.invisible, afk=True)
 
     async def on_command(self, ctx):
