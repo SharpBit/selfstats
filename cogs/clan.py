@@ -52,7 +52,8 @@ class Clan:
         else:
             rank = str(clan.rank)
 
-        chest = str(clan.clan_chest.crowns) + '/' + str(clan.clan_chest.required)
+        chest = str(clan.clan_chest.crowns) + '/' + str(clan.clan_chest.required) + \
+            '(' + str(100 - clan.clan_chest.percent) + '%)'
         members = str(len(clan.members)) + '/50'
 
         em.title = clan.name + '(#' + clan.tag + ')'
