@@ -33,27 +33,25 @@ class Cards:
         card = card.lower()
         if card in aliases:
             card = aliases[card]
-        constants = self.bot.constants
+
         try:
-            found_card = constants.cards[card]
+            color = await ctx.get_dominant_color(ctx.author.avatar_url)
+            em = discord.Embed(title=card.title(), color=color)
+            em.set_author(name='Card Info', icon_url=ctx.author.avatar_url)
+            em.description = card.description
+            em.add_field(name='Rarity', value=card.rarity)
+            em.add_field(name='Type', value=card.type)
+            em.add_field(name='Arena', value='Arena ' + str(card.arena))
+            em.add_field(name='Cost', value='{card.elixir} elixir')
+
+            em.set_thumbnail(url='attachment://card.png')
+            em.set_footer(name='Selfbot made by SharpBit | Powered by cr-api',
+                          icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+
+                with open(f"data/cards/{card.replace(' ', '-').replace('.','')}.png", 'rb') as c:
+                    await ctx.send(embed=em, files=[discord.File(c, 'card.png')])
         except KeyError:
-            return await ctx.send('That\'s not a card.')
-
-        color = await ctx.get_dominant_color(ctx.author.avatar_url)
-        em = discord.Embed(title=card.title(), color=color)
-        em.set_author(name='Card Info', icon_url=ctx.author.avatar_url)
-        em.description = card.description
-        em.add_field(name='Rarity', value=card.rarity)
-        em.add_field(name='Type', value=card.type)
-        em.add_field(name='Arena', value='Arena ' + str(card.arena))
-        em.add_field(name='Cost', value='{card.elixir} elixir')
-
-        em.set_thumbnail(url='attachment://card.png')
-        em.set_footer(name='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
-
-        with open(f"data/cards/{card.replace(' ', '-').replace('.','')}.png", 'rb') as c:
-            await ctx.send(embed=em, files=[discord.File(c, 'card.png')])
+            await ctx.send('That\'s not a card.')
 
 
 def setup(bot):
