@@ -60,7 +60,7 @@ class Clan:
         if len(clan.members) >= 3:
             for i in range(3):
                 pushers.append(
-                    f"**{clan.members[i].name}**\n{clan.members[i].trophies} trophies\n#{c.members[i].tag}")
+                    f"**{clan.members[i].name}**\n{clan.members[i].trophies} trophies\n#{clan.members[i].tag}")
         contributors = list(reversed(sorted(clan.members, key=lambda x: x.crowns)))
 
         ccc = []
