@@ -42,10 +42,10 @@ class Cards:
         color = await ctx.get_dominant_color(ctx.author.avatar_url)
         em = discord.Embed(title=card.title(), color=color)
         em.set_author(name='Card Info', icon_url=ctx.author.avatar_url)
-        em.description = found_card.description
-        em.add_field(name='Rarity', value=found_card.rarity)
-        em.add_field(name='Type', value=found_card.type)
-        em.add_field(name='Arena', value='Arena ' + str(found_card.arena))
+        em.description = card.description
+        em.add_field(name='Rarity', value=card.rarity)
+        em.add_field(name='Type', value=card.type)
+        em.add_field(name='Arena', value='Arena ' + str(card.arena))
         em.add_field(name='Cost', value='{card.elixir} elixir')
 
         em.set_thumbnail(url='attachment://card.png')
