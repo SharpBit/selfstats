@@ -56,6 +56,19 @@ class Clan:
             f' ({(clan.clan_chest.crowns / clan.clan_chest.required) * 100:.3f}%)'
         members = str(len(clan.members)) + '/50'
 
+        pushers = []
+        if len(clan.members) >= 3:
+            for i in range(3):
+                pushers.append(
+                    f"**{clan.members[i].name}**\n{clan.members[i].trophies} trophies\n#{c.members[i].tag}")
+        contributors = list(reversed(sorted(clan.members, key=lambda x: x.crowns)))
+
+        ccc = []
+        if len(clan.members) >= 3:
+            for i in range(3):
+                ccc.append(
+                    f"**{contributors[i].name}**\n{contributors[i].crowns} crowns\n#{contributors[i].tag}")
+
         em.title = clan.name + ' (#' + clan.tag + ')'
         em.set_author(name='Clan Info', icon_url=ctx.author.avatar_url)
         em.description = clan.description
@@ -68,6 +81,8 @@ class Clan:
         em.add_field(name='Type', value=clan.type_name)
         em.add_field(name='Clan Chest', value=chest)
         em.add_field(name='Members', value=members)
+        em.add_field(name='Top Players', value='\n\n'.join(pushers))
+        em.add_field(name='Top Contributors', value='\n\n'.join(ccc))
 
         em.set_thumbnail(url=clan.badge_url)
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
