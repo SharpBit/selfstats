@@ -81,7 +81,7 @@ class Clan:
         await ctx.send('Proper usage: `(prefix)members <best|worst>`')
 
     @members.command()
-    async def worst(self, ctx, clan):
+    async def worst(self, ctx, clan=None):
         '''Find the worst members in a clan'''
         em = discord.Embed(title='Least Valuable Members')
         em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
@@ -129,7 +129,7 @@ class Clan:
             await ctx.send(embed=em)
 
     @members.command()
-    async def best(self, ctx, clan):
+    async def best(self, ctx, clan=None):
         '''Find the best members in a clan'''
         em = discord.Embed(title='Most Valuable Members')
         em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
