@@ -48,8 +48,8 @@ class Cards:
             em.set_footer(name='Selfbot made by SharpBit | Powered by cr-api',
                           icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
-                with open(f"data/cards/{card.replace(' ', '-').replace('.','')}.png", 'rb') as c:
-                    await ctx.send(embed=em, files=[discord.File(c, 'card.png')])
+            with open(f"data/cards/{card.replace(' ', '-').replace('.','')}.png", 'rb') as c:
+                await ctx.send(embed=em, files=[discord.File(c, 'card.png')])
         except KeyError:
             await ctx.send('That\'s not a card.')
 
