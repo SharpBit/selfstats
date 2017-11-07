@@ -26,8 +26,8 @@ class Profile:
     def get_chests(self, ctx, p):
         cycle = p.chest_cycle
         pos = cycle.position
-        chests = '| ' + p.get_chest(0).title() + ' | \n'
-        chests += '\n'.join([p.get_chest(x).title() for x in range(1, 10)])
+        chests = '|' + p.get_chest(0).title() + '|\n'
+        chests += '\n'.join([p.get_chest(x).title() for x in range(1, 8)])
         special = ''
         for i, attr in enumerate(self.cdir(cycle)):
             if attr != 'position':
