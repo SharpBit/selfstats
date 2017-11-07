@@ -4,6 +4,7 @@ from discord.ext import commands
 import asyncio
 from colorthief import ColorThief
 from urllib.parse import urlparse
+import json
 import io
 import os
 
@@ -119,6 +120,24 @@ class CustomContext(commands.Context):
             await self.send(msg)
         else:
             await self.message.add_reaction('⁉')
+
+    def load_json(self, path=None):
+        with open(path or 'data/config.json') as f:
+            return json.load(f)
+
+    def save_json(self, data, path=None):
+        with open(path or 'data/config.json', 'w') as f:
+            f.write(json.dumps(data, indent=4))
+
+    def save_tag(self, tag):
+        data = self.load_json()
+        data['TAG'] = tag
+        self.save_json(data)
+
+    def get_tag(self):
+        data = self.load_json()
+        tag = data['TAG']
+        return tag
 
     @staticmethod
     def paginate(text: str):

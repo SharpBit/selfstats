@@ -17,6 +17,11 @@ import re
 import io
 
 
+class InvalidTag(commands.BadArgument):
+    '''Raised when a tag is invalid'''
+    pass
+
+
 class Selfbot(commands.Bot):
     '''Custom Client for selfstats.py - Made by Jason#1510'''
     _mentions_transforms = {

@@ -49,6 +49,7 @@ class Profile:
             if tag is None:
                 em.description - 'Please add `TAG` to your config.'
                 return await ctx.send(embed=em)
+        tag = tag.strip('#').replace('O', '0')
         try:
             profile = await self.client.get_profile(tag)
         except:
@@ -115,7 +116,7 @@ class Profile:
         em.add_field(name='Arena', value=arena)
 
         em.add_field(name='Trophies', value=trophies +
-                     '/' + highest_trophies + '(PB)/' + legend_trophies + 'LEGEND')
+                     '/' + highest_trophies + '(PB)/' + legend_trophies + ' Legend')
         em.add_field(name='Global Rank', value=global_rank)
         em.add_field(name='Total Donations', value=donations)
         em.add_field(name='Win Percentage', value=win_percent)
