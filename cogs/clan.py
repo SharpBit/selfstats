@@ -41,6 +41,7 @@ class Clan:
                 tag = config['TAG']
         self.tag = os.environ.get('TAG') or tag
         self.cr = bot.cr
+        self.client = crasync.Client()
         self.conv = TagCheck()
 
     async def get_clan_from_profile(self, ctx, tag, message):
