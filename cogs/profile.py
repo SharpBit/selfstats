@@ -26,7 +26,7 @@ class Profile:
     def get_chests(self, ctx, p):
         cycle = p.chest_cycle
         pos = cycle.position
-        chests = '|' + p.get_chest(0).title() + '|\n'
+        chests = p.get_chest(0).title() + '\n'
         chests += '\n'.join([p.get_chest(x).title() for x in range(1, 8)])
         special = ''
         for i, attr in enumerate(self.cdir(cycle)):
@@ -196,20 +196,17 @@ class Profile:
             em.description = 'Either the API is down or that\'s an invalid tag.'
             return await ctx.send(embed=em)
 
-        deck = profile.deck
-        deck_levels = {}
-        for card in deck:
-            deck_levels[card.name] = 'Lvl ' + str(card.level)
-        fmt = ''
-        for key, value in deck_levels.items():
-            fmt += key + ': ' + value + '\n'
+        deck = ''
+        for card in profile.deck:
+            deck += f'{card.name}: Lvl {card.level}\n'
 
         em.title = profile.name
         em.set_author(name='Battle Deck', icon_url=ctx.author.avatar_url)
-        em.description = fmt
+        em.description = deck
         em.set_thumbnail(
-            url='https://i.pinimg.com/736x/46/11/09/46110956bb8b5e3fc5e01ad566a2f99d--swords-wer.jpg')
-        em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api')
+            url='https://cdn.discordapp.com/emojis/376367875965059083.png')
+        em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
+                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
         await ctx.send(embed=em)
 
