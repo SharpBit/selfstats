@@ -20,38 +20,56 @@ class Cards:
         self.tag = os.environ.get('TAG') or tag
         self.client = crasync.Client()
 
-    @commands.command(aliases=['card', 'ci'])
-    async def cardinfo(self, ctx, *, card):
+    @commands.command()
+    async def card(self, ctx, *, card):
         '''Get the info of a card'''
+        arenas = {
+            0: 'Training Camp',
+            1: 'Goblin Stadium',
+            2: 'Bone Pit',
+            3: 'Barbarian Bowl',
+            4: "P.E.K.K.A's Playhouse",
+            5: 'Spell Valley',
+            6: "Builder's Workshop",
+            7: 'Royal Arena',
+            8: 'Frozen Peak',
+            9: 'Jungle Arena',
+            10: 'Hog Mountain'
+        }
+
         aliases = {
             "log": "the log",
             "pump": 'elixir collector',
             'skarmy': 'skeleton army',
             'pekka': 'p.e.k.k.a',
-            'mini pekka': 'mini p.e.k.k.a'
+            'mini pekka': 'mini p.e.k.k.a',
+            'xbow': 'x-bow'
         }
         card = card.lower()
         if card in aliases:
             card = aliases[card]
 
+        constants = self.bot.constants
         try:
-            color = await ctx.get_dominant_color(ctx.author.avatar_url)
-            em = discord.Embed(title=card.title(), color=color)
-            em.set_author(name='Card Info', icon_url=ctx.author.avatar_url)
-            em.description = card.description
-            em.add_field(name='Rarity', value=card.rarity)
-            em.add_field(name='Type', value=card.type)
-            em.add_field(name='Arena', value='Arena ' + str(card.arena))
-            em.add_field(name='Cost', value='{card.elixir} elixir')
-
-            em.set_thumbnail(url='attachment://card.png')
-            em.set_footer(name='Selfbot made by SharpBit | Powered by cr-api',
-                          icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
-
-            with open(f"data/cards/{card.replace(' ', '-').replace('.','')}.png", 'rb') as c:
-                await ctx.send(embed=em, files=[discord.File(c, 'card.png')])
+            found_card = constants.cards[card]
         except KeyError:
-            await ctx.send('That\'s not a card.')
+            return await ctx.send("That's not a card!")
+
+        color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em = discord.Embed(title=found_card.title(), color=color)
+        em.set_author(name='Card Info', icon_url=ctx.author.avatar_url)
+        em.description = found_card.description
+        em.add_field(name='Rarity', value=found_card.rarity)
+        em.add_field(name='Type', value=found_card.type)
+        em.add_field(name='Arena', value=arenas[found_card.arena])
+        em.add_field(name='Cost', value=f'{found_card.elixir} elixir')
+
+        em.set_thumbnail(url='attachment://card.png')
+        em.set_footer(name='Selfbot made by SharpBit | Powered by cr-api',
+                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+
+        with open(f"data/cards/{card.replace(' ', '-').replace('.','')}.png", 'rb') as c:
+            await ctx.send(embed=em, files=[discord.File(c, 'card.png')])
 
 
 def setup(bot):
