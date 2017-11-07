@@ -136,7 +136,7 @@ class Profile:
         em.add_field(name='Chests Until', value=special)
         em.add_field(name='Shop Offers', value=shop_offers)
         if s:
-            em.add_field(f'Previous Season Results ({s.number})', value=season)
+            em.add_field(name=f'Previous Season Results ({s.number})', value=season)
         else:
             pass
 
