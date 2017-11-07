@@ -26,7 +26,7 @@ class Profile:
     def get_chests(self, ctx, p):
         cycle = p.chest_cycle
         pos = cycle.position
-        chests = '| ' + p.get_chest(0).lower() + ' | '
+        chests = '| ' + p.get_chest(0).title() + ' | \n'
         chests += '\n'.join([p.get_chest(x).title() for x in range(1, 10)])
         special = ''
         for i, attr in enumerate(self.cdir(cycle)):
@@ -96,11 +96,11 @@ class Profile:
         special = self.get_chests(ctx, profile)[1]
         shop_offers = ''
         if profile.shop_offers.legendary:
-            shop_offers += f"Legendary Chest: {profile.shop_offers.legendary} days "
+            shop_offers += f"Legendary Chest: {profile.shop_offers.legendary} days\n"
         if profile.shop_offers.epic:
-            shop_offers += f"Epic Chest: {profile.shop_offers.epic} days "
+            shop_offers += f"Epic Chest: {profile.shop_offers.epic} days\n"
         if profile.shop_offers.arena:
-            shop_offers += f"Arena: {profile.shop_offers.arena} days "
+            shop_offers += f"Arena: {profile.shop_offers.arena} days\n"
 
         deck = ''
         for card in profile.deck:
