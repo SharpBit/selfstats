@@ -80,7 +80,7 @@ class Profile:
 
         chests = self.get_chests(ctx, profile)[0]
         cycle = profile.chest_cycle
-        pos = cycle.pos
+        pos = cycle.position
         special = ''
 
         s = None
