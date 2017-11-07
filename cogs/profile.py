@@ -29,7 +29,7 @@ class Profile:
         chests = '| ' + p.get_chest(0).lower() + ' | '
         chests += ''.join([p.get_chest(x).lower() for x in range(1, 10)])
         special = ''
-        for i, attr in enumerate(cdir(cycle)):
+        for i, attr in enumerate(self.cdir(cycle)):
             if attr != 'position':
                 e = attr.replace('_', '')
                 if getattr(cycle, attr):
