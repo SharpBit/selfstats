@@ -27,7 +27,7 @@ class Profile:
         cycle = p.chest_cycle
         pos = cycle.position
         chests = '| ' + p.get_chest(0).lower() + ' | '
-        chests += ''.join([p.get_chest(x).lower() for x in range(1, 10)])
+        chests += '\n'.join([p.get_chest(x).title() for x in range(1, 10)])
         special = ''
         for i, attr in enumerate(self.cdir(cycle)):
             if attr != 'position':
@@ -35,7 +35,7 @@ class Profile:
                 if getattr(cycle, attr):
                     c_pos = int(getattr(cycle, attr))
                     until = c_pos - pos
-                    special += f'{e}+{until} '
+                    special += f'{e.title()}+{until} '
                     return (chests, special)
 
     @commands.command()
@@ -70,11 +70,11 @@ class Profile:
         trophies = str(profile.current_trophies)
         highest_trophies = str(profile.highest_trophies)
         legend_trophies = str(profile.legend_trophies)
-        arena = profile.arena.name + ' | Arena ' + str(profile.arena.number)
+        arena = profile.arena.name
         win_streak = str(profile.win_streak)
 
         donations = str(profile.total_donations)
-        win_percent = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f} %'
+        win_percent = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}%'
         record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
         av = profile.clan_badge_url or 'https://i.imgur.com/Y3uXsgj.png'
 
@@ -96,15 +96,15 @@ class Profile:
         special = self.get_chests(ctx, profile)[1]
         shop_offers = ''
         if profile.shop_offers.legendary:
-            shop_offers += f"Legendary Chest: {profile.shop_offers.legendary} days"
+            shop_offers += f"Legendary Chest: {profile.shop_offers.legendary} days "
         if profile.shop_offers.epic:
-            shop_offers += f"Epic Chest: {profile.shop_offers.epic}"
+            shop_offers += f"Epic Chest: {profile.shop_offers.epic} days "
         if profile.shop_offers.arena:
-            shop_offers += f"Arena: {profile.shop_offers.arena} days"
+            shop_offers += f"Arena: {profile.shop_offers.arena} days "
 
         deck = ''
         for card in profile.deck:
-            deck += '{card.name}: Lvl {card.level}\n'
+            deck += f'{card.name}: Lvl {card.level}\n'
 
         em.title = profile.name
         em.description = f'#{tag}'
@@ -114,14 +114,14 @@ class Profile:
         em.add_field(name='Level', value=level + ' (' + experience + ')')
         em.add_field(name='Arena', value=arena)
 
-        em.add_field(name='Trophies (Current/Best/Legend)', value=trophies +
-                     '/' + highest_trophies + '/' + legend_trophies)
+        em.add_field(name='Trophies', value=trophies +
+                     '/' + highest_trophies + '(PB)/' + legend_trophies + 'LEGEND')
         em.add_field(name='Global Rank', value=global_rank)
         em.add_field(name='Total Donations', value=donations)
         em.add_field(name='Win Percentage', value=win_percent)
         em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
         em.add_field(name='Favorite Card', value=profile.favourite_card)
-        em.add_field(name='Game Record (Win Streak)', value=record + '(' + win_streak + ')')
+        em.add_field(name='Game Record (Win Streak)', value=record + ' (' + win_streak + ')')
 
         if profile.clan_role:
             em.add_field(name='Clan Info', value=clan.name +
@@ -136,7 +136,7 @@ class Profile:
         em.add_field(name='Chests Until', value=special)
         em.add_field(name='Shop Offers', value=shop_offers)
         if s:
-            em.add_field(name=f'Previous Season Results ({s.number})', value=season)
+            em.add_field(name=f'Previous Season Results (Season {s.number})', value=season)
         else:
             pass
 
