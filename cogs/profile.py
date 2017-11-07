@@ -20,10 +20,10 @@ class Profile:
         self.tag = os.environ.get('TAG') or tag
         self.client = crasync.Client()
 
-    def cdir(obj):
+    def cdir(self, obj):
         return [x for x in dir(obj) if not x.startswith('_')]
 
-    def get_chests(ctx, p):
+    def get_chests(self, ctx, p):
         cycle = p.chest_cycle
         pos = cycle.position
         chests = '| ' + p.get_chest(0).lower() + ' | '
