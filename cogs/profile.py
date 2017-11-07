@@ -20,6 +20,24 @@ class Profile:
         self.tag = os.environ.get('TAG') or tag
         self.client = crasync.Client()
 
+    def cdir(obj):
+        return [x for x in dir(obj) if not x.startswith('_')]
+
+    def get_chests(ctx, p):
+        cycle = p.chest_cycle
+        pos = cycle.position
+        chests = '| ' + p.get_chest(0).lower() + ' | '
+        chests += ''.join([p.get_chest(x).lower() for x in range(1, 10)])
+        special = ''
+        for i, attr in enumerate(cdir(cycle)):
+            if attr != 'position':
+                e = attr.replace('_', '')
+                if getattr(cycle, attr):
+                    c_pos = int(getattr(cycle, attr))
+                    until = c_pos - pos
+                    special += f'{e}+{until} '
+                    return (chests, special)
+
     @commands.command()
     async def profile(self, ctx, tag=None):
         '''Fetch a Clash Royale Profile'''
@@ -47,12 +65,6 @@ class Profile:
         else:
             global_rank = 'Unranked'
 
-        # cycle = ',\n'.join([profile.get_chest(x) for x in range(10)])
-        # c = profile.chest_cycle
-        # sm = str(c.super_magical)
-        # legend = str(c.legendary)
-        # epic = str(c.epic)
-
         level = str(profile.level)
         experience = str(profile.experience[0]) + '/' + str(profile.experience[1])
         trophies = str(profile.current_trophies)
@@ -64,22 +76,40 @@ class Profile:
         donations = str(profile.total_donations)
         win_percent = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f} %'
         record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
+        av = profile.clan_badge_url or 'https://i.imgur.com/Y3uXsgj.png'
 
-        deck = profile.deck
-        deck_levels = {}
-        for card in deck:
-            deck_levels[card.name] = 'Lvl ' + str(card.level)
-        fmt = ''
-        for key, value in deck_levels.items():
-            fmt += key + ': ' + value + '\n'
+        chests = self.get_chests(ctx, profile)[0]
+        cycle = profile.chest_cycle
+        pos = cycle.pos
+        special = ''
+
+        s = None
+        if profile.seasons:
+            s = profile.seasons[0]
+            global_r = s.end_global
+            season = f"Highest: {s.highest} trophies\n" \
+                     f"Finish: {s.ending} trophies\n" \
+                     f"Global Rank: {global_r}"
+        else:
+            season = None
+
+        special = self.get_chests(ctx, profile)[1]
+        shop_offers = ''
+        if profile.shop_offers.legendary:
+            shop_offers += f"Legendary Chest: {profile.shop_offers.legendary} days"
+        if profile.shop_offers.epic:
+            shop_offers += f"Epic Chest: {profile.shop_offers.epic}"
+        if profile.shop_offers.arena:
+            shop_offers += f"Arena: {profile.shop_offers.arena} days"
+
+        deck = ''
+        for card in profile.deck:
+            deck += '{card.name}: Lvl {card.level}\n'
 
         em.title = profile.name
         em.description = f'#{tag}'
         em.url = f'http://cr-api.com/profile/{tag}'
-        if clan is not None:
-            em.set_author(name='Profile', icon_url=clan.badge_url)
-        else:
-            em.set_author(name='Profile', icon_url='https://i.imgur.com/Y3uXsgj.png')
+        em.set_author(name='Profile', icon_url=av)
 
         em.add_field(name='Level', value=level + ' (' + experience + ')')
         em.add_field(name='Arena', value=arena)
@@ -93,7 +123,7 @@ class Profile:
         em.add_field(name='Favorite Card', value=profile.favourite_card)
         em.add_field(name='Game Record (Win Streak)', value=record + '(' + win_streak + ')')
 
-        if clan is not None:
+        if profile.clan_role:
             em.add_field(name='Clan Info', value=clan.name +
                          '\n#' + clan.tag + '\n' + profile.clan_role)
         else:
@@ -101,13 +131,20 @@ class Profile:
 
         em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
         em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
-        em.add_field(name='Battle Deck', value=fmt)
-        # em.add_field(name='Chests', value=cycle + '\nSuper Magical: ' +
-        #             sm + '\nLegendary: ' + legend + '\nEpic: ' + epic)
+        em.add_field(name='Battle Deck', value=deck)
+        em.add_field(name=f'Chests (Total {pos} opened)', value=chests)
+        em.add_field(name='Chests Until', value=special)
+        em.add_field(name='Shop Offers', value=shop_offers)
+        if s:
+            em.add_field(f'Previous Season Results ({s.number})', value=season)
+        else:
+            pass
 
         em.set_thumbnail(url=profile.arena.image_url)
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
                       icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+
+        await ctx.send(embed=em)
 
     @commands.command()
     async def trophies(self, ctx, tag=None):
@@ -173,6 +210,8 @@ class Profile:
         em.set_thumbnail(
             url='https://i.pinimg.com/736x/46/11/09/46110956bb8b5e3fc5e01ad566a2f99d--swords-wer.jpg')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api')
+
+        await ctx.send(embed=em)
 
     @commands.command()
     async def weburl(self, ctx, tag=None):
