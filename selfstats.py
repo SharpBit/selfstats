@@ -23,7 +23,7 @@ class InvalidTag(commands.BadArgument):
 
 
 class Selfbot(commands.Bot):
-    '''Custom Client for selfstats.py - Made by Jason#1510'''
+    '''Custom Client for selfstats.py - Made by SharpBit#1510'''
     _mentions_transforms = {
         '@everyone': '@\u200beveryone',
         '@here': '@\u200bhere'
@@ -140,7 +140,7 @@ class Selfbot(commands.Bot):
         ---------------
         Client is ready!
         ---------------
-        Author: Jason#1510
+        Author: SharpBit#1510
         ---------------
         Logged in as: {self.user}
         User ID: {self.user.id}
@@ -225,7 +225,7 @@ class Selfbot(commands.Bot):
         github = '[Click Here](https://github.com/SharpBit/selfstats/)'
         server = '[Click Here](https://discord.gg/9NjbQCd)'
 
-        embed.add_field(name='Author', value='Jason#1510')
+        embed.add_field(name='Author', value='SharpBit#1510')
         embed.add_field(name='Uptime', value=uptime)
         embed.add_field(name='Guilds', value=len(self.guilds))
         embed.add_field(name='Members', value=f'{total_unique} total\n{total_online} online')
