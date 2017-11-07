@@ -65,7 +65,7 @@ class Cards:
         em.add_field(name='Cost', value=f'{found_card.elixir} elixir')
 
         em.set_thumbnail(url='attachment://card.png')
-        em.set_footer(name='Selfbot made by SharpBit | Powered by cr-api',
+        em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
                       icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
         with open(f"data/cards/{card.replace(' ', '-').replace('.','')}.png", 'rb') as c:
