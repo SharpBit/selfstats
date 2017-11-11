@@ -202,7 +202,7 @@ class Profile:
         for card in profile.deck:
             deck += f'{card.name}: Lvl {card.level}\n'
             aoe += card.elixir
-        aoe = f'{(aoe / 8):.3f}'
+        aoe = f'{(aoe / 8):.1f}'
 
         em.title = profile.name
         em.set_author(name='Battle Deck', icon_url=ctx.author.avatar_url)
