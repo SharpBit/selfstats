@@ -121,7 +121,7 @@ class Profile:
         em.add_field(name='Total Donations', value=donations)
         em.add_field(name='Win Percentage', value=win_percent)
         em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
-        em.add_field(name='Favorite Card', value=profile.favourite_card)
+        em.add_field(name='Favorite Card', value=profile.favourite_card.replace('_', ' '))
         em.add_field(name='Game Record (Win Streak)', value=record + ' (' + win_streak + ')')
 
         if profile.clan_role:
