@@ -198,6 +198,7 @@ class Profile:
             return await ctx.send(embed=em)
 
         deck = ''
+        aoe = 0
         for card in profile.deck:
             deck += f'{card.name}: Lvl {card.level}\n'
             aoe += card.elixir
