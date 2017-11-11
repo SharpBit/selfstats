@@ -200,10 +200,13 @@ class Profile:
         deck = ''
         for card in profile.deck:
             deck += f'{card.name}: Lvl {card.level}\n'
+            aoe += card.elixir
+        aoe = f'{(aoe / 8):.3f}'
 
         em.title = profile.name
         em.set_author(name='Battle Deck', icon_url=ctx.author.avatar_url)
         em.description = deck
+        em.add_field(name='Battle Deck Average Elixir Cost', value=aoe)
         em.set_thumbnail(
             url='https://cdn.discordapp.com/emojis/376367875965059083.png')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
