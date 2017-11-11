@@ -2,7 +2,7 @@
 ### Authors:
 - [SharpBit](https://github.com/SharpBit)
 ### Contributors:
-If you would like to become a *contributor*, join [the discord server](https://discord.gg/9NjbQCd) and talk to SharpBit#1510
+If you would like to become a *contributor*, join [the discord server](https://discord.gg/9NjbQCd) and talk to `SharpBit#1510`
 *Earn a special role in the server and get acknowledged for your efforts!*
 
 ### Join Us:
@@ -45,7 +45,6 @@ If you need to edit your token, prefix, or Clash Royale tag, navigate into the d
 - [x] View more detailed info about your clan
 - [x] Individually get your trophies (current, best, legend)
 - [x] Find out how much longer until you get that super magical chest
-- [x] Find your next 9 chests!
 - [x] Clan Chest Info
 - [x] See your chest cycle
 - [x] Find out when your next shop offer is
