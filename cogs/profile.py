@@ -35,7 +35,7 @@ class Profile:
                 if getattr(cycle, attr):
                     c_pos = int(getattr(cycle, attr))
                     until = c_pos - pos
-                    special += f'{e.title()}+{until} '
+                    special += f'{e.title()} +{until} '
                     return (chests, special)
 
     @commands.command()
