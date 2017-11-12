@@ -21,7 +21,6 @@ git+https://github.com/Rapptz/discord.py@rewrite
 colorthief
 psutil
 crasync
-cr-py
 ```
 Do `pip install -r path\to\requirements.txt` to install the requirements.
 Example: `pip install -r C:\Users\SharpBit\selfstats\requirements.txt`
