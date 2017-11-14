@@ -119,9 +119,9 @@ class Clan:
         em.set_author(name='Clan Info', icon_url=ctx.author.avatar_url)
         em.description = clan.description
 
-        em.add_field(name='Score', value=str(clan.score))
-        em.add_field(name='Required Trophies', value=str(clan.required_trophies))
-        em.add_field(name='Donations', value=str(clan.donations))
+        em.add_field(name='Score', value=f'{clan.score}')
+        em.add_field(name='Required Trophies', value=f'{clan.required_trophies}')
+        em.add_field(name='Donations', value=f'{clan.donations}')
         em.add_field(name='Region', value=clan.region)
         em.add_field(name='Global Rank', value=rank)
         em.add_field(name='Type', value=clan.type_name)
@@ -153,7 +153,7 @@ class Clan:
                 em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
-            clan_tag = clan.strip('\#').replace('O', '0')
+            clan_tag = clan.strip('#').replace('O', '0')
             clan = await self.client.get_clan(clan_tag)
 
         try:
@@ -166,7 +166,7 @@ class Clan:
 
         chest = clan.clan_chest
 
-        em.title = clan.name + ' (#' + clan.tag + ')'
+        em.title = f'{clan.name} (#{clan.tag})'
         em.set_author(name='Clan Chest', icon_url=ctx.author.avatar_url)
         em.description = clan.description
 
