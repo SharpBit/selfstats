@@ -217,7 +217,7 @@ class Clan:
             try:
                 profile = await self.client.get_profile(tag)
             except Exception as e:
-                em.description = '`{e}`'
+                em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
             clan_tag = clan.strip('\#').replace('O', '0')
