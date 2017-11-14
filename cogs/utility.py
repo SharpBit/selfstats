@@ -75,7 +75,7 @@ class Utility:
 
         for embed in pages:
             em = discord.Embed(title='Command Help', color=color)
-            embed += f'\n\nType {ctx.prefix}help command for more info on a command.\nYou can also type {ctx.prefix}help category for more info on a category.
+            embed += f'\n\nType {ctx.prefix}help command for more info on a command.\nYou can also type {ctx.prefix}help category for more info on a category.'
             em.description = embed
             try:
                 await ctx.send(embed=em)
