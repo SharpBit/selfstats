@@ -201,7 +201,7 @@ class Clan:
     @commands.group(invoke_without_command=True)
     async def members(self, ctx):
         '''A command group that finds the worst and best members in a clan'''
-        await ctx.send('Proper usage: `{ctx.prefix}members <best|worst>`')
+        await ctx.send(f'Proper usage: `{ctx.prefix}members <best|worst>`')
 
     @members.command()
     async def worst(self, ctx, clan=None):
