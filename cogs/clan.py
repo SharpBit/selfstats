@@ -247,7 +247,7 @@ class Clan:
 
             for m in reversed(to_kick):
                 em.add_field(name=f'{m.name}, Role: {m.role_name}',
-                             value=f"#{m.tag}\n{m.trophies} trophies\n{m.crowns} crowns\n{m.donations} donations")
+                             value=f'#{m.tag}\n{m.trophies} trophies\n{m.crowns} crowns\n{m.donations} donations')
 
             await ctx.send(embed=em)
 
@@ -295,7 +295,7 @@ class Clan:
 
         for m in reversed(best):
             em.add_field(name=f'{m.name}, Role: {m.role_name}',
-                         value=f"#{m.tag}\n{m.trophies} trophies\n{m.crowns} crowns\n{m.donations} donations")
+                         value=f'#{m.tag}\n{m.trophies} trophies\n{m.crowns} crowns\n{m.donations} donations')
 
         await ctx.send(embed=em)
 
