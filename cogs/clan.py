@@ -78,8 +78,8 @@ class Clan:
                 return await ctx.send(embed=em)
             try:
                 profile = await self.client.get_profile(tag)
-            except:
-                em.description = 'Either the API is down or your tag is an invalid player tag.'
+            except Exception as e:
+                em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
             clan_tag = clan_tag.strip('\#').replace('O', '0')
@@ -149,8 +149,8 @@ class Clan:
                 return await ctx.send(embed=em)
             try:
                 profile = await self.client.get_profile(tag)
-            except:
-                em.description = 'Either the API is down or your tag is an invalid player tag.'
+            except Exception as e:
+                em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
             clan_tag = clan.strip('\#').replace('O', '0')
@@ -216,8 +216,8 @@ class Clan:
                 return await ctx.send(embed=em)
             try:
                 profile = await self.client.get_profile(tag)
-            except:
-                em.description = 'Either the API is down or your tag is an invalid player tag.'
+            except Exception as e:
+                em.description = '`{e}`'
                 return await ctx.send(embed=em)
         else:
             clan_tag = clan.strip('\#').replace('O', '0')
@@ -264,8 +264,8 @@ class Clan:
                 return await ctx.send(embed=em)
             try:
                 profile = await self.client.get_profile(tag)
-            except:
-                em.description = 'Either the API is down or your tag is an invalid player tag.'
+            except Exception as e:
+                em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
             clan_tag = clan.strip('\#').replace('O', '0')
