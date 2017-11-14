@@ -83,7 +83,7 @@ class Clan:
                 em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
-            clan_tag = clan_tag.strip('\#').replace('O', '0')
+            clan_tag = clan_tag.strip('#').replace('O', '0')
             clan = await self.client.get_clan(clan_tag)
 
         try:
@@ -220,7 +220,7 @@ class Clan:
                 em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
-            clan_tag = clan.strip('\#').replace('O', '0')
+            clan_tag = clan.strip('#').replace('O', '0')
             clan = await self.client.get_clan(clan_tag)
 
         try:
@@ -268,7 +268,7 @@ class Clan:
                 em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
-            clan_tag = clan.strip('\#').replace('O', '0')
+            clan_tag = clan.strip('#').replace('O', '0')
             clan = await self.client.get_clan(clan_tag)
 
         try:
