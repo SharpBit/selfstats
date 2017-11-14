@@ -22,6 +22,7 @@ class Clan:
 
     @commands.command()
     async def clan(self, ctx, clan_tag=None):
+        '''Returns clan info for a clan'''
         em = discord.Embed(title='Clan Info')
         em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
 
@@ -50,11 +51,10 @@ class Clan:
         if clan.rank == 0:
             rank = 'Unranked'
         else:
-            rank = str(clan.rank)
+            rank = f'{clan.rank}'
 
-        chest = str(clan.clan_chest.crowns) + '/' + str(clan.clan_chest.required) + \
-            f' ({(clan.clan_chest.crowns / clan.clan_chest.required) * 100:.3f}%)'
-        members = str(len(clan.members)) + '/50'
+        chest = f'{clan.clan_chest.crowns}/{clan.clan_chest.required)} ({(clan.clan_chest.crowns / clan.clan_chest.required) * 100:.3f}%)'
+        members = f'{len(clan.members)}/50'
 
         pushers = []
         if len(clan.members) >= 3:
@@ -69,7 +69,7 @@ class Clan:
                 ccc.append(
                     f"**{contributors[i].name}**\n{contributors[i].crowns} crowns\n#{contributors[i].tag}")
 
-        em.title = clan.name + ' (#' + clan.tag + ')'
+        em.title = f'{clan.name} (#{clan.tag})'
         em.set_author(name='Clan Info', icon_url=ctx.author.avatar_url)
         em.description = clan.description
 
@@ -93,7 +93,7 @@ class Clan:
     @commands.group(invoke_without_command=True)
     async def members(self, ctx):
         '''A command group that finds the worst and best members in a clan'''
-        await ctx.send('Proper usage: `(prefix)members <best|worst>`')
+        await ctx.send('Proper usage: `{ctx.prefix}members <best|worst>`')
 
     @members.command()
     async def worst(self, ctx, clan=None):

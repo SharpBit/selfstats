@@ -64,18 +64,8 @@ class Profile:
             global_rank = str(profile.global_rank)
         else:
             global_rank = 'Unranked'
-
-        level = str(profile.level)
-        experience = str(profile.experience[0]) + '/' + str(profile.experience[1])
-        trophies = str(profile.current_trophies)
-        highest_trophies = str(profile.highest_trophies)
-        legend_trophies = str(profile.legend_trophies)
-        arena = profile.arena.name
-        win_streak = str(profile.win_streak)
-
-        donations = str(profile.total_donations)
-        win_percent = f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}%'
-        record = str(profile.wins) + '-' + str(profile.draws) + '-' + str(profile.losses)
+        experience = f'{profile.experience[0]}/{profile.experience[1]}'
+        record = f'{profile.wins}-{profile.draws}-{profile.losses}'
         av = profile.clan_badge_url or 'https://i.imgur.com/Y3uXsgj.png'
 
         chests = self.get_chests(ctx, profile)[0]
@@ -111,21 +101,21 @@ class Profile:
         em.url = f'http://cr-api.com/profile/{tag}'
         em.set_author(name='Profile', icon_url=av)
 
-        em.add_field(name='Level', value=level + ' (' + experience + ')')
-        em.add_field(name='Arena', value=arena)
+        em.add_field(name='Level', value=f'{level} ({experience})')
+        em.add_field(name='Arena', value=profile.arena.name)
 
-        em.add_field(name='Trophies', value=trophies +
-                     '/' + highest_trophies + '(PB)/' + legend_trophies + 'LEGEND')
+        em.add_field(
+            name='Trophies', value=f'{profile.current_trophies}/{profile.highest_trophies}(PB)/{profile.legend_trophies} LEGEND')
         em.add_field(name='Global Rank', value=global_rank)
-        em.add_field(name='Total Donations', value=donations)
-        em.add_field(name='Win Percentage', value=win_percent)
-        em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
+        em.add_field(name='Total Donations', value=f'{profile.total_donations}')
+        em.add_field(name='Win Percentage',
+                     value=f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}%')
+        em.add_field(name='Max Challenge Wins', value=f'{profile.max_wins}')
         em.add_field(name='Favorite Card', value=profile.favourite_card)
-        em.add_field(name='Game Record (Win Streak)', value=record + ' (' + win_streak + ')')
+        em.add_field(name='Game Record (Win Streak)', value=f'{record} ({profile.win_streak})')
 
         if profile.clan_role:
-            em.add_field(name='Clan Info', value=clan.name +
-                         '\n#' + clan.tag + '\n' + profile.clan_role)
+            em.add_field(name='Clan Info', value=f'{clan.name}\n#{clan.tag}\n{profile.clan_role}')
         else:
             em.add_field(name='Clan Info', value='No clan')
 
@@ -170,8 +160,7 @@ class Profile:
         em.title = profile.name
         em.set_author(
             name='Trophies', icon_url='http://clashroyalehack1.com/wp-content/uploads/2017/06/coctrophy.png')
-        em.description = 'Trophies: `' + trophies + '`\nPersonal Best: `' + \
-            highest_trophies + '`\nLegend Trophies: `' + legend_trophies + '`'
+        em.description = f'Trophies: `{profile.current_trophies}`\nPersonal Best: `{profile.highest_trophies}`\nLegend Trophies: `{profile.legend_trophies}`'
         em.set_thumbnail(
             url='http://vignette1.wikia.nocookie.net/clashroyale/images/7/7c/LegendTrophy.png/revision/latest?cb=20160305151655')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
