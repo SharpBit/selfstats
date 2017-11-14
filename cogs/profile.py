@@ -52,8 +52,8 @@ class Profile:
         tag = tag.strip('#').replace('O', '0')
         try:
             profile = await self.client.get_profile(tag)
-        except:
-            em.description = 'Either the API is down or that\'s an invalid tag.'
+        except Exception as e:
+            em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
         try:
@@ -160,8 +160,8 @@ class Profile:
                 return await ctx.send(embed=em)
         try:
             profile = await self.client.get_profile(tag)
-        except:
-            em.description = 'Either the API is down or that\'s an invalid tag.'
+        except Exception as e:
+            em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
         trophies = str(profile.current_trophies)
@@ -193,8 +193,8 @@ class Profile:
                 return await ctx.send(embed=em)
         try:
             profile = await self.client.get_profile(tag)
-        except:
-            em.description = 'Either the API is down or that\'s an invalid tag.'
+        except Exception as e:
+            em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
         deck = ''
@@ -227,8 +227,8 @@ class Profile:
                 return await ctx.send(embed=em)
         try:
             profile = await self.client.get_profile(tag)
-        except:
-            em.description = 'Either the API is down or that\'s an invalid tag.'
+        except Exception as e:
+            em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
         em.url = f'http://cr-api.com/profile/{tag}'
