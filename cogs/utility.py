@@ -76,7 +76,7 @@ class Utility:
         for embed in pages:
             em = discord.Embed(title='Command Help', color=color)
             embed = embed.strip('```')
-            em.description = embee
+            em.description = embed
             try:
                 await ctx.send(embed=em)
             except discord.HTTPException:
