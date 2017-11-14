@@ -8,6 +8,8 @@ If you would like to become a *contributor*, join [the discord server](https://d
 ### Join Us:
 Join the [official discord server](https://discord.gg/9NjbQCd) to contribute to selfstats.py and be the first to beta test it!
 
+#### Star the repo for a special role in the discord server!
+
 ## Hosting:
 There are two ways you can host it, on a PC, or on Heroku for **free, 24/7!**
 
