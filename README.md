@@ -2,11 +2,13 @@
 ### Authors:
 - [SharpBit](https://github.com/SharpBit)
 ### Contributors:
-If you would like to become a *contributor*, join [the discord server](https://discord.gg/9NjbQCd) and talk to Jason#1510
+If you would like to become a *contributor*, join [the discord server](https://discord.gg/9NjbQCd) and talk to `SharpBit#1510`
 *Earn a special role in the server and get acknowledged for your efforts!*
 
 ### Join Us:
 Join the [official discord server](https://discord.gg/9NjbQCd) to contribute to selfstats.py and be the first to beta test it!
+
+#### Star the repo for a special role in the discord server!
 
 ## Hosting:
 There are two ways you can host it, on a PC, or on Heroku for **free, 24/7!**
@@ -21,7 +23,6 @@ git+https://github.com/Rapptz/discord.py@rewrite
 colorthief
 psutil
 crasync
-cr-py
 ```
 Do `pip install -r path\to\requirements.txt` to install the requirements.
 Example: `pip install -r C:\Users\SharpBit\selfstats\requirements.txt`
@@ -42,12 +43,11 @@ If you need to edit your token, prefix, or Clash Royale tag, navigate into the d
 
 ### Features
 - [x] Fetch your profile, chest cycle, clan info, etc.
-- [ ] View more detailed info about your clan
+- [x] View more detailed info about your clan
 - [x] Individually get your trophies (current, best, legend)
 - [x] Find out how much longer until you get that super magical chest
-- [x] Find your next 9 chests!
-- [ ] Clan Chest Info
-- [ ] See your chest cycle
+- [x] Clan Chest Info
+- [x] See your chest cycle
 - [x] Find out when your next shop offer is
 - [x] Custom Prefix
 - [x] Logout, tinyurl (link shortener), dominant color command, put code into a hastebin, get the source code for a command

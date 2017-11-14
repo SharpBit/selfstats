@@ -35,7 +35,7 @@ class Profile:
                 if getattr(cycle, attr):
                     c_pos = int(getattr(cycle, attr))
                     until = c_pos - pos
-                    special += f'{e.title()}+{until} '
+                    special += f'{e.title()}: +{until} '
                     return (chests, special)
 
     @commands.command()
@@ -49,10 +49,11 @@ class Profile:
             if tag is None:
                 em.description - 'Please add `TAG` to your config.'
                 return await ctx.send(embed=em)
+        tag = tag.strip('#').replace('O', '0')
         try:
             profile = await self.client.get_profile(tag)
-        except:
-            em.description = 'Either the API is down or that\'s an invalid tag.'
+        except Exception as e:
+            em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
         try:
@@ -104,6 +105,7 @@ class Profile:
         em.add_field(name='Level', value=f'{level} ({experience})')
         em.add_field(name='Arena', value=profile.arena.name)
 
+<<<<<<< HEAD
         em.add_field(
             name='Trophies', value=f'{profile.current_trophies}/{profile.highest_trophies}(PB)/{profile.legend_trophies} LEGEND')
         em.add_field(name='Global Rank', value=global_rank)
@@ -113,6 +115,16 @@ class Profile:
         em.add_field(name='Max Challenge Wins', value=f'{profile.max_wins}')
         em.add_field(name='Favorite Card', value=profile.favourite_card)
         em.add_field(name='Game Record (Win Streak)', value=f'{record} ({profile.win_streak})')
+=======
+        em.add_field(name='Trophies', value=trophies +
+                     '/' + highest_trophies + '(PB)/' + legend_trophies + ' Legend')
+        em.add_field(name='Global Rank', value=global_rank)
+        em.add_field(name='Total Donations', value=donations)
+        em.add_field(name='Win Percentage', value=win_percent)
+        em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
+        em.add_field(name='Favorite Card', value=profile.favourite_card.replace('_', ' '))
+        em.add_field(name='Game Record (Win Streak)', value=record + ' (' + win_streak + ')')
+>>>>>>> bd61c2fef37c3fc9a76eeb2b79e9d7d7639753ef
 
         if profile.clan_role:
             em.add_field(name='Clan Info', value=f'{clan.name}\n#{clan.tag}\n{profile.clan_role}')
@@ -149,8 +161,8 @@ class Profile:
                 return await ctx.send(embed=em)
         try:
             profile = await self.client.get_profile(tag)
-        except:
-            em.description = 'Either the API is down or that\'s an invalid tag.'
+        except Exception as e:
+            em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
         trophies = str(profile.current_trophies)
@@ -181,17 +193,21 @@ class Profile:
                 return await ctx.send(embed=em)
         try:
             profile = await self.client.get_profile(tag)
-        except:
-            em.description = 'Either the API is down or that\'s an invalid tag.'
+        except Exception as e:
+            em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
         deck = ''
+        aoe = 0
         for card in profile.deck:
             deck += f'{card.name}: Lvl {card.level}\n'
+            aoe += card.elixir
+        aoe = f'{(aoe / 8):.1f}'
 
         em.title = profile.name
         em.set_author(name='Battle Deck', icon_url=ctx.author.avatar_url)
         em.description = deck
+        em.add_field(name='Battle Deck Average Elixir Cost', value=aoe)
         em.set_thumbnail(
             url='https://cdn.discordapp.com/emojis/376367875965059083.png')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
@@ -211,8 +227,8 @@ class Profile:
                 return await ctx.send(embed=em)
         try:
             profile = await self.client.get_profile(tag)
-        except:
-            em.description = 'Either the API is down or that\'s an invalid tag.'
+        except Exception as e:
+            em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
         em.url = f'http://cr-api.com/profile/{tag}'

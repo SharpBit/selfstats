@@ -1,5 +1,6 @@
 {
     "TOKEN": "your_token_here",
     "PREFIX": "cr.",
-    "TAG": "your_tag_here"
+    "TAG": "your_tag_here",
+    "GITHUBTOKEN": "github_token_here"
 }
