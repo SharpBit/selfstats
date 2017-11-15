@@ -113,14 +113,15 @@ class Profile:
         em.add_field(name='Max Challenge Wins', value=f'{profile.max_wins}')
         em.add_field(name='Favorite Card', value=profile.favourite_card)
         em.add_field(name='Game Record (Win Streak)', value=f'{record} ({profile.win_streak})')
-        em.add_field(name='Trophies', value=trophies +
-                     '/' + highest_trophies + '(PB)/' + legend_trophies + ' Legend')
+        em.add_field(
+            name='Trophies', value=f'{profile.current_trophies}/{profile.highest_trophies}(PB)/{profile.legend_trophies} Legend')
         em.add_field(name='Global Rank', value=global_rank)
-        em.add_field(name='Total Donations', value=donations)
-        em.add_field(name='Win Percentage', value=win_percent)
-        em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
+        em.add_field(name='Total Donations', valuef'{profile.total_donations}')
+        em.add_field(name='Win Percentage',
+                     value=f'{(profile.wins / (profile.wins + profile.losses) * 100):.3f}%')
+        em.add_field(name='Max Challenge Wins', value=f'{profile.max_wins}')
         em.add_field(name='Favorite Card', value=profile.favourite_card.replace('_', ' '))
-        em.add_field(name='Game Record (Win Streak)', value=record + ' (' + win_streak + ')')
+        em.add_field(name='Game Record (Win Streak)', value=f'{record} ({profile.win_streak})')
         if profile.clan_role:
             em.add_field(name='Clan Info', value=f'{clan.name}\n#{clan.tag}\n{profile.clan_role}')
         else:
