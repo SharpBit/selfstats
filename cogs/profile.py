@@ -161,10 +161,6 @@ class Profile:
             em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
-        trophies = str(profile.current_trophies)
-        highest_trophies = str(profile.highest_trophies)
-        legend_trophies = str(profile.legend_trophies)
-
         em.title = profile.name
         em.set_author(
             name='Trophies', icon_url='http://clashroyalehack1.com/wp-content/uploads/2017/06/coctrophy.png')
