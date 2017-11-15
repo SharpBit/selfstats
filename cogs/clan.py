@@ -143,7 +143,7 @@ class Clan:
         if clan is None:
             tag = self.tag
             if tag is None:
-                em.description - 'Please add `TAG` to your config.'
+                em.description = 'Please add `TAG` to your config.'
                 return await ctx.send(embed=em)
             try:
                 profile = await self.client.get_profile(tag)
