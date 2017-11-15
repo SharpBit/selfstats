@@ -102,7 +102,7 @@ class Profile:
         em.url = f'http://cr-api.com/profile/{tag}'
         em.set_author(name='Profile', icon_url=av)
 
-        em.add_field(name='Level', value=f'{level} ({experience})')
+        em.add_field(name='Level', value=f'{profile.level} ({experience})')
         em.add_field(name='Arena', value=profile.arena.name)
         em.add_field(
             name='Trophies', value=f'{profile.current_trophies}/{profile.highest_trophies}(PB)/{profile.legend_trophies} LEGEND')
