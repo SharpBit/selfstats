@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-=======
 import discord
 from discord.ext import commands
-from ext import embeds
-from __main__ import InvalidTag
 import crasync
 import aiohttp
 import json
@@ -85,7 +81,7 @@ class Clan:
                 em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
-            clan_tag = clan_tag.strip('#').replace('O', '0')
+            clan_tag = clan_tag.strip('\#').replace('O', '0')
             clan = await self.client.get_clan(clan_tag)
 
         try:
@@ -168,7 +164,7 @@ class Clan:
 
         chest = clan.clan_chest
 
-        em.title = f'{clan.name} (#{clan.tag})'
+        em.title = clan.name + ' (#' + clan.tag + ')'
         em.set_author(name='Clan Chest', icon_url=ctx.author.avatar_url)
         em.description = clan.description
 
@@ -249,7 +245,7 @@ class Clan:
 
             for m in reversed(to_kick):
                 em.add_field(name=f'{m.name}, Role: {m.role_name}',
-                             value=f'#{m.tag}\n{m.trophies} trophies\n{m.crowns} crowns\n{m.donations} donations')
+                             value=f"#{m.tag}\n{m.trophies} trophies\n{m.crowns} crowns\n{m.donations} donations")
 
             await ctx.send(embed=em)
 
@@ -297,11 +293,10 @@ class Clan:
 
         for m in reversed(best):
             em.add_field(name=f'{m.name}, Role: {m.role_name}',
-                         value=f'#{m.tag}\n{m.trophies} trophies\n{m.crowns} crowns\n{m.donations} donations')
+                         value=f"#{m.tag}\n{m.trophies} trophies\n{m.crowns} crowns\n{m.donations} donations")
 
         await ctx.send(embed=em)
 
 
 def setup(bot):
     bot.add_cog(Clan(bot))
->>>>>>> a9c4ee5c1fd590be661a9f0a6a2c6a99d07d5416
