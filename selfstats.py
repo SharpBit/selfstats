@@ -40,6 +40,7 @@ class Selfbot(commands.Bot):
         self.last_message = None
         self.messages_sent = 0
         self.commands_used = defaultdict(int)
+        self.remove_command('help')
         self._add_commands()
         self.load_extensions()
 

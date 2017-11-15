@@ -104,8 +104,6 @@ class Profile:
 
         em.add_field(name='Level', value=f'{level} ({experience})')
         em.add_field(name='Arena', value=profile.arena.name)
-
-<<<<<<< HEAD
         em.add_field(
             name='Trophies', value=f'{profile.current_trophies}/{profile.highest_trophies}(PB)/{profile.legend_trophies} LEGEND')
         em.add_field(name='Global Rank', value=global_rank)
@@ -115,7 +113,6 @@ class Profile:
         em.add_field(name='Max Challenge Wins', value=f'{profile.max_wins}')
         em.add_field(name='Favorite Card', value=profile.favourite_card)
         em.add_field(name='Game Record (Win Streak)', value=f'{record} ({profile.win_streak})')
-=======
         em.add_field(name='Trophies', value=trophies +
                      '/' + highest_trophies + '(PB)/' + legend_trophies + ' Legend')
         em.add_field(name='Global Rank', value=global_rank)
@@ -124,8 +121,6 @@ class Profile:
         em.add_field(name='Max Challenge Wins', value=str(profile.max_wins))
         em.add_field(name='Favorite Card', value=profile.favourite_card.replace('_', ' '))
         em.add_field(name='Game Record (Win Streak)', value=record + ' (' + win_streak + ')')
->>>>>>> bd61c2fef37c3fc9a76eeb2b79e9d7d7639753ef
-
         if profile.clan_role:
             em.add_field(name='Clan Info', value=f'{clan.name}\n#{clan.tag}\n{profile.clan_role}')
         else:
