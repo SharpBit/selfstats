@@ -81,7 +81,7 @@ class Clan:
                 em.description = f'`{e}`'
                 return await ctx.send(embed=em)
         else:
-            clan_tag = clan_tag.strip('\#').replace('O', '0')
+            clan_tag = clan_tag.strip('#').replace('O', '0')
             clan = await self.client.get_clan(clan_tag)
 
         try:
@@ -164,7 +164,7 @@ class Clan:
 
         chest = clan.clan_chest
 
-        em.title = clan.name + ' (#' + clan.tag + ')'
+        em.title = f'{clan.name} (#{clan.tag})'
         em.set_author(name='Clan Chest', icon_url=ctx.author.avatar_url)
         em.description = clan.description
 
@@ -210,7 +210,7 @@ class Clan:
         if clan is None:
             tag = self.tag
             if tag is None:
-                em.description - 'Please add `TAG` to your config.'
+                em.description = 'Please add `TAG` to your config.'
                 return await ctx.send(embed=em)
             try:
                 profile = await self.client.get_profile(tag)
