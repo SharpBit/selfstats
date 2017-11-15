@@ -6,26 +6,6 @@ import json
 import os
 
 
-class TagCheck(commands.MemberConverter):
-
-    check = 'PYLQGRJCUV0289'
-
-    def resolve_tag(self, tag):
-        tag = tag.strip('#').upper().replace('O', '0')
-
-        if any(i not in self.check for i in tag):
-            return False
-        else:
-            return tag
-
-    async def convert(self, ctx, argument):
-        tag = self.resolve_tag(argument)
-        if not tag:
-            raise InvalidTag('Invalid tag passed')
-        else:
-            return tag
-
-
 class Clan:
     '''Get info about a clan'''
 
@@ -38,31 +18,7 @@ class Clan:
             else:
                 tag = config['TAG']
         self.tag = os.environ.get('TAG') or tag
-        self.cr = bot.cr
         self.client = crasync.Client()
-        self.conv = TagCheck()
-
-    async def get_clan_from_profile(self, ctx, tag, message):
-        profile = await self.cr.get_profile(tag)
-        clan_tag = profile.clan_tag
-        if clan_tag is None:
-            await ctx.send(message)
-            raise ValueError(message)
-        else:
-            return clan_tag
-
-    async def resolve_tag(self, ctx, tag, clan=False):
-        if not tag:
-            try:
-                tag = ctx.get_tag()
-            except Exception as e:
-                print(e)
-                await ctx.send('Add your tag to your config vars')
-                raise e
-            else:
-                if clan is True:
-                    return await self.get_clan_from_profile(ctx, tag, 'You are not in a clan!')
-                return tag
 
     @commands.command()
     async def clan(self, ctx, clan_tag=None):
