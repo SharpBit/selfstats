@@ -105,15 +105,6 @@ class Profile:
         em.add_field(name='Level', value=f'{profile.level} ({experience})')
         em.add_field(name='Arena', value=profile.arena.name)
         em.add_field(
-            name='Trophies', value=f'{profile.current_trophies}/{profile.highest_trophies}(PB)/{profile.legend_trophies} LEGEND')
-        em.add_field(name='Global Rank', value=global_rank)
-        em.add_field(name='Total Donations', value=f'{profile.total_donations}')
-        em.add_field(name='Win Percentage',
-                     value=f'{(profile.wins / (profile.wins + profile.losses)*100):.3f}%')
-        em.add_field(name='Max Challenge Wins', value=f'{profile.max_wins}')
-        em.add_field(name='Favorite Card', value=profile.favourite_card)
-        em.add_field(name='Game Record (Win Streak)', value=f'{record} ({profile.win_streak})')
-        em.add_field(
             name='Trophies', value=f'{profile.current_trophies}/{profile.highest_trophies}(PB)/{profile.legend_trophies} Legend')
         em.add_field(name='Global Rank', value=global_rank)
         em.add_field(name='Total Donations', value=f'{profile.total_donations}')
