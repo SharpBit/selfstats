@@ -137,7 +137,7 @@ class Clan:
     @commands.command()
     async def clanchest(self, ctx, clan=None):
         '''Returns clan chest info for a clan'''
-        em = discord.Embed(title='Clan Info')
+        em = discord.Embed(title='Clan Chest Info')
         em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
 
         if clan is None:
