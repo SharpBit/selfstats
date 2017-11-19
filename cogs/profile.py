@@ -6,6 +6,13 @@ import json
 import os
 
 
+def random_color(self):
+    color = ('#%06x' % random.randint(8, 0xFFFFFF))
+    color = int(color[1:], 16)
+    color = discord.Color(value=color)
+    return color
+
+
 class Profile:
     '''Get info about your Profile'''
 
@@ -42,7 +49,7 @@ class Profile:
     async def profile(self, ctx, tag=None):
         '''Fetch a Clash Royale Profile'''
         em = discord.Embed(title='Profile')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em.color = random.color()
 
         if tag is None:
             tag = self.tag
@@ -139,7 +146,7 @@ class Profile:
     async def trophies(self, ctx, tag=None):
         '''See your current, record, and legend trophies'''
         em = discord.Embed(title='Trophies')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em.color = random.color()
 
         if tag is None:
             tag = self.tag
@@ -167,7 +174,7 @@ class Profile:
     async def deck(self, ctx, tag=None):
         '''View a player's deck'''
         em = discord.Embed(title='Battle Deck')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em.color = random.color()
 
         if tag is None:
             tag = self.tag
@@ -202,7 +209,7 @@ class Profile:
     async def weburl(self, ctx, tag=None):
         '''Get the cr-api.com url for a tag'''
         em = discord.Embed(title='cr-api.com URL')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em.color = random.color()
         if tag is None:
             tag = self.tag
             if tag is None:

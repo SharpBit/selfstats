@@ -24,34 +24,6 @@ class CustomContext(commands.Context):
         '''shortcut'''
         return self.message.delete()
 
-    async def get_ban(self, name_or_id):
-        '''Helper function to retrieve a banned user'''
-        for ban in await self.guild.bans():
-            if name_or_id.isdigit():
-                if ban.user.id == int(name_or_id):
-                    return ban
-            if name_or_id.lower() in str(ban.user).lower():
-                return ban
-
-    async def purge(self, *args, **kwargs):
-        '''Shortcut to channel.purge, preset for selfbots.'''
-        kwargs.setdefault('bulk', False)
-        await self.channel.purge(*args, **kwargs)
-
-    async def _get_message(self, channel, id):
-        '''Goes through channel history to get a message'''
-        async for message in channel.history(limit=2000):
-            if message.id == id:
-                return message
-
-    async def get_message(self, channel_or_id, id=None):
-        '''Helper tool to get a message for selfbots'''
-        if isinstance(channel_or_id, int):
-            msg = await self._get_message(channel=self.channel, id=channel_or_id)
-        else:
-            msg = await self._get_message(channel=channel_or_id, id=id)
-        return msg
-
     async def confirm(self, msg):
         '''Small helper for confirmation messages.'''
         await self.send(msg or '*Are you sure you want to proceed?* `(Y/N)`')
@@ -80,32 +52,6 @@ class CustomContext(commands.Context):
         parsed = urlparse(url)
         if any(parsed.path.endswith(i) for i in types):
             return url.replace(parsed.query, 'size=128')
-
-    async def get_dominant_color(self, url=None, quality=10):
-        '''Returns the dominant color of an image from a url'''
-        maybe_col = os.environ.get('COLOR')
-
-        url = url or self.author.avatar_url
-
-        if maybe_col:
-            raw = int(maybe_col.strip('#'), 16)
-            return discord.Color(value=raw)
-
-        if not self.is_valid_image_url(url):
-            raise ValueError('Invalid image url passed.')
-        try:
-            async with self.session.get(url) as resp:
-                image = await resp.read()
-        except:
-            return discord.Color.default()
-
-        with io.BytesIO(image) as f:
-            try:
-                color = ColorThief(f).get_color(quality=quality)
-            except:
-                return discord.Color.dark_grey()
-
-        return discord.Color.from_rgb(*color)
 
     async def success(self, ctx, msg=None, delete=False):
         if delete:

@@ -4,6 +4,7 @@ from ext.context import CustomContext
 from collections import defaultdict
 from ext import embedtobox
 import textwrap
+import random
 import crasync
 import aiohttp
 import psutil
@@ -34,6 +35,13 @@ for cog in cogs:
     except Exception as e:
         print(f'LoadError: {cog}\n'
               f'type(e).__name__: {e}')
+
+
+def random_color(self):
+    color = ('#%06x' % random.randint(8, 0xFFFFFF))
+    color = int(color[1:], 16)
+    color = discord.Color(value=color)
+    return color
 
 
 @property
@@ -121,7 +129,7 @@ async def ping(ctx):
     em = discord.Embed()
     em.title = 'Pong! Latency:'
     em.description = f'{bot.ws.latency * 1000:.4f} ms'
-    em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+    em.color = random_color()
     try:
         await ctx.send(embed=em)
     except discord.HTTPException:
@@ -135,7 +143,7 @@ async def about(ctx):
     '''See information about the selfbot and latest changes.'''
 
     embed = discord.Embed()
-    embed.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+    embed.color = random_color()
 
     embed.set_author(name='selfstats.py', icon_url=ctx.author.avatar_url)
 

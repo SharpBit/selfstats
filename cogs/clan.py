@@ -6,6 +6,13 @@ import json
 import os
 
 
+def random_color(self):
+    color = ('#%06x' % random.randint(8, 0xFFFFFF))
+    color = int(color[1:], 16)
+    color = discord.Color(value=color)
+    return color
+
+
 class Clan:
     '''Get info about a clan'''
 
@@ -24,7 +31,7 @@ class Clan:
     async def clan(self, ctx, clan_tag=None):
         '''Returns clan info for a clan'''
         em = discord.Embed(title='Clan Info')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em.color = random.color()
 
         if clan_tag is None:
             tag = self.tag
@@ -94,7 +101,7 @@ class Clan:
     async def clanchest(self, ctx, clan=None):
         '''Returns clan chest info for a clan'''
         em = discord.Embed(title='Clan Chest Info')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em.color = random.color()
 
         if clan is None:
             tag = self.tag
@@ -161,7 +168,7 @@ class Clan:
     async def worst(self, ctx, clan=None):
         '''Find the worst members in a clan'''
         em = discord.Embed(title='Least Valuable Members')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em.color = random.color()
 
         if clan is None:
             tag = self.tag
@@ -209,7 +216,7 @@ class Clan:
     async def best(self, ctx, clan=None):
         '''Find the best members in a clan'''
         em = discord.Embed(title='Most Valuable Members')
-        em.color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        em.color = random.color()
 
         if clan is None:
             tag = self.tag

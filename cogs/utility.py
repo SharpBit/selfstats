@@ -7,6 +7,13 @@ import inspect
 import io
 
 
+def random_color(self):
+    color = ('#%06x' % random.randint(8, 0xFFFFFF))
+    color = int(color[1:], 16)
+    color = discord.Color(value=color)
+    return color
+
+
 class Utility:
     '''Useful commands to make your life easier'''
 
@@ -72,7 +79,7 @@ class Utility:
             if characters > 1000:
                 destination = ctx.message.author
 
-        color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        color = random.color()
 
         for embed in pages:
             em = discord.Embed(title='Command Help', color=color)
@@ -109,7 +116,7 @@ class Utility:
         url = 'http://tinyurl.com/api-create.php?url=' + link
         async with ctx.session.get(url) as resp:
             new = await resp.text()
-        emb = discord.Embed(color=await ctx.get_dominant_color(ctx.author.avatar_url))
+        emb = discord.Embed(color=random.color())
         emb.add_field(name="Original Link", value=link, inline=False)
         emb.add_field(name="Shortened Link", value=new, inline=False)
         emb.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',

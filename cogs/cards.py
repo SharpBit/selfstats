@@ -2,8 +2,16 @@ import discord
 from discord.ext import commands
 import crasync
 import aiohttp
+import random
 import json
 import os
+
+
+def random_color(self):
+    color = ('#%06x' % random.randint(8, 0xFFFFFF))
+    color = int(color[1:], 16)
+    color = discord.Color(value=color)
+    return color
 
 
 class Cards:
@@ -55,7 +63,7 @@ class Cards:
         except KeyError:
             return await ctx.send("That's not a card!")
 
-        color = await ctx.get_dominant_color(ctx.author.avatar_url)
+        color = random_color()
         em = discord.Embed(title=found_card.name, color=color)
         em.set_author(name='Card Info', icon_url=ctx.author.avatar_url)
         em.description = found_card.description
