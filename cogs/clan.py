@@ -2,11 +2,12 @@ import discord
 from discord.ext import commands
 import crasync
 import aiohttp
+import random
 import json
 import os
 
 
-def random_color(self):
+def random_color():
     color = ('#%06x' % random.randint(8, 0xFFFFFF))
     color = int(color[1:], 16)
     color = discord.Color(value=color)
@@ -31,7 +32,7 @@ class Clan:
     async def clan(self, ctx, clan_tag=None):
         '''Returns clan info for a clan'''
         em = discord.Embed(title='Clan Info')
-        em.color = random.color()
+        em.color = random_color()
 
         if clan_tag is None:
             tag = self.tag
@@ -101,7 +102,7 @@ class Clan:
     async def clanchest(self, ctx, clan=None):
         '''Returns clan chest info for a clan'''
         em = discord.Embed(title='Clan Chest Info')
-        em.color = random.color()
+        em.color = random_color()
 
         if clan is None:
             tag = self.tag
@@ -168,7 +169,7 @@ class Clan:
     async def worst(self, ctx, clan=None):
         '''Find the worst members in a clan'''
         em = discord.Embed(title='Least Valuable Members')
-        em.color = random.color()
+        em.color = random_color()
 
         if clan is None:
             tag = self.tag
@@ -216,7 +217,7 @@ class Clan:
     async def best(self, ctx, clan=None):
         '''Find the best members in a clan'''
         em = discord.Embed(title='Most Valuable Members')
-        em.color = random.color()
+        em.color = random_color()
 
         if clan is None:
             tag = self.tag

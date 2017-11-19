@@ -4,10 +4,11 @@ from ext.colors import ColorNames
 from ext import embedtobox
 from PIL import Image
 import inspect
+import random
 import io
 
 
-def random_color(self):
+def random_color():
     color = ('#%06x' % random.randint(8, 0xFFFFFF))
     color = int(color[1:], 16)
     color = discord.Color(value=color)
@@ -79,7 +80,7 @@ class Utility:
             if characters > 1000:
                 destination = ctx.message.author
 
-        color = random.color()
+        color = random_color()
 
         for embed in pages:
             em = discord.Embed(title='Command Help', color=color)
@@ -116,7 +117,7 @@ class Utility:
         url = 'http://tinyurl.com/api-create.php?url=' + link
         async with ctx.session.get(url) as resp:
             new = await resp.text()
-        emb = discord.Embed(color=random.color())
+        emb = discord.Embed(color=random_color())
         emb.add_field(name="Original Link", value=link, inline=False)
         emb.add_field(name="Shortened Link", value=new, inline=False)
         emb.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
