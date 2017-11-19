@@ -37,22 +37,6 @@ for cog in cogs:
 
 
 @property
-def token():
-    '''Returns your token'''
-    try:
-        with open('data/config.json') as f:
-            config = json.load(f)
-            if config.get('TOKEN') == "your_token_here":
-                if not os.environ.get('TOKEN'):
-                    run_wizard()
-                else:
-                    token = config.get('TOKEN').strip('\"')
-    except FileNotFoundError:
-        token = None
-    return os.environ.get('TOKEN') or token
-
-
-@property
 def tag():
     '''Returns your Clash Royale tag'''
     with open('data/config.json') as f:
@@ -63,13 +47,6 @@ def tag():
         else:
             tag = config.get('TAG').strip('#').replace('O', '0')
     return os.environ.get('TAG') or tag
-
-
-def get_pre():
-    '''Returns the prefix'''
-    with open('data/config.json') as f:
-        prefix = json.load(f).get('PREFIX')
-    return os.environ.get('PREFIX') or prefix or 'cr.'
 
 
 def run_wizard():
@@ -90,19 +67,6 @@ def run_wizard():
     print('Restarting...')
     print('------------------------------------------')
     os.execv(sys.executable, ['python'] + sys.argv)
-
-
-def init(token=None):
-    '''Starts the actual selfbot'''
-    safe_token = token
-    try:
-        bot.run(safe_token, bot=False, reconnect=True)
-    except Exception as e:
-        print(e)
-
-    async def on_connect(self):
-        print('---------------\n'
-              'selfstats.py connected!')
 
 
 async def on_ready():
@@ -206,4 +170,6 @@ async def about(ctx):
 
 
 if __name__ == '__main__':
-    init()
+    if not os.environ.get('TOKEN'):
+        print('Add token to your config vars.')
+    bot.run(os.environ.get('TOKEN').strip('\"'), bot=False, reconnect=True)
