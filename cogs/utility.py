@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from ext.colors import ColorNames
+from ext import embedtobox
 from PIL import Image
 import inspect
 import io
@@ -20,10 +21,10 @@ class Utility:
         '''
         await ctx.send('`Selfbot Logging out...`')
         await self.bot.logout()
-        
+
     @commands.command(name='help')
     async def new_help_command(self, ctx, *commands: str):
-        """Shows this message."""
+        '''Shows this message.'''
         destination = ctx.message.author if self.bot.pm_help else ctx.message.channel
 
         def repl(obj):

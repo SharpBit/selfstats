@@ -107,7 +107,7 @@ class CustomContext(commands.Context):
 
         return discord.Color.from_rgb(*color)
 
-    async def success(self, msg=None, delete=False):
+    async def success(self, ctx, msg=None, delete=False):
         if delete:
             await ctx.message.delete()
         if msg:

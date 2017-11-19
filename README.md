@@ -53,7 +53,3 @@ If you need to edit your token, prefix, or Clash Royale tag, navigate into the d
 - [x] Logout, tinyurl (link shortener), dominant color command, put code into a hastebin, get the source code for a command
 If you want to request features, [create an issue](https://github.com/SharpBit/selfstats/issues) on this repo.
 This is a `stateless selfbot` (Saves no data). *This means you can [host it on heroku](https://github.com/SharpBit/selfstats/wiki/Host-selfstats.py-24-7-For-Free-on-Heroku!) 24/7 for free*
-
-### Acknowledgements
-The structure of the selfbot and custom context by [verixx](https://github.com/verixx) from selfbot.py.
-Footer by [kwugfighter](https://github.com/kwugfighter)
