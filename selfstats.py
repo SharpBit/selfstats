@@ -1,7 +1,5 @@
 import discord
 from discord.ext import commands
-from ext.context import CustomContext
-from collections import defaultdict
 from ext import embedtobox
 import textwrap
 import random
@@ -23,7 +21,6 @@ _mention_pattern = re.compile('|'.join(_mentions_transforms.keys()))
 bot = commands.Bot(command_prefix=os.environ.get('PREFIX') or 'cr.', self_bot=True)
 process = psutil.Process()
 cogs = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
-commands_used = defaultdict(int)
 bot.remove_command('help')
 
 
@@ -97,19 +94,6 @@ async def on_ready():
     '''))
 
     await bot.change_presence(status=discord.Status.invisible, afk=True)
-
-
-async def on_command(ctx):
-    cmd = ctx.command.qualified_name.replace(' ', '_')
-    commands_used[cmd] += 1
-
-
-async def process_commands(message):
-    '''Utilizes the CustomContext subclass of discord.Content'''
-    ctx = await bot.get_context(message, cls=CustomContext)
-    if ctx.command is None:
-        return
-    await bot.invoke(ctx)
 
 
 async def on_message(message):
