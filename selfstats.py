@@ -37,7 +37,7 @@ for cog in cogs:
               f'type(e).__name__: {e}')
 
 
-def random_color(self):
+def random_color():
     color = ('#%06x' % random.randint(8, 0xFFFFFF))
     color = int(color[1:], 16)
     color = discord.Color(value=color)
