@@ -115,7 +115,7 @@ def get_server(id):
     return discord.utils.get(bot.guilds, id=id)
 
 
-@commands.command()
+@bot.command()
 async def ping(ctx):
     '''Pong! Returns your latency'''
     em = discord.Embed()
@@ -130,7 +130,7 @@ async def ping(ctx):
             await ctx.send(page)
 
 
-@commands.command(aliases=['bot', 'info'])
+@bot.command(aliases=['bot', 'info'])
 async def about(ctx):
     '''See information about the selfbot and latest changes.'''
 
