@@ -206,4 +206,4 @@ async def about(ctx):
 
 
 if __name__ == '__main__':
-    init()
+    init(bot)
