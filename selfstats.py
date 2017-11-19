@@ -23,6 +23,7 @@ bot = commands.Bot(command_prefix=os.environ.get('PREFIX') or 'cr.', self_bot=Tr
 process = psutil.Process()
 cogs = [x.replace('.py', '') for x in os.listdir('cogs') if x.endswith('.py')]
 commands_used = defaultdict(int)
+bot.remove_command('help')
 
 
 path = 'cogs.'
@@ -91,12 +92,11 @@ def run_wizard():
     os.execv(sys.executable, ['python'] + sys.argv)
 
 
-def init(bot, token=None):
+def init(token=None):
     '''Starts the actual selfbot'''
-    selfbot = bot()
-    safe_token = token or selfbot.token.strip('\"')
+    safe_token = token or bot.token.strip('\"')
     try:
-        selfbot.run(safe_token, bot=False, reconnect=True)
+        bot.run(safe_token, bot=False, reconnect=True)
     except Exception as e:
         print(e)
 
