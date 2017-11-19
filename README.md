@@ -49,7 +49,7 @@ If you need to edit your token, prefix, or Clash Royale tag, navigate into the d
 - [x] Clan Chest Info
 - [x] See your chest cycle
 - [x] Find out when your next shop offer is
-- [x] Custom Prefix
+- [ ] Custom Prefix
 - [x] Logout, tinyurl (link shortener), dominant color command, put code into a hastebin, get the source code for a command
 If you want to request features, [create an issue](https://github.com/SharpBit/selfstats/issues) on this repo.
 This is a `stateless selfbot` (Saves no data). *This means you can [host it on heroku](https://github.com/SharpBit/selfstats/wiki/Host-selfstats.py-24-7-For-Free-on-Heroku!) 24/7 for free*
