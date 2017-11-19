@@ -94,7 +94,7 @@ def run_wizard():
 
 def init(token=None):
     '''Starts the actual selfbot'''
-    safe_token = token or bot.token.strip('\"')
+    safe_token = token
     try:
         bot.run(safe_token, bot=False, reconnect=True)
     except Exception as e:
