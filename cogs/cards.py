@@ -27,11 +27,6 @@ class Cards:
                 tag = config['TAG']
         self.tag = os.environ.get('TAG') or tag
         self.client = crasync.Client()
-        self.session = aiohttp.ClientSession(loop=self.loop)
-        self.cr = crasync.Client(self.session)
-
-    async def constants(self):
-        self.constants = await self.cr.get_constants()
 
     @commands.command()
     async def card(self, ctx, *, card):
