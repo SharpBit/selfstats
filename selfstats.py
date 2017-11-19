@@ -23,7 +23,7 @@ class InvalidTag(commands.BadArgument):
 
 
 class Selfbot(commands.Bot):
-    '''Custom Client for selfstats.py - Made by SharpBit#1510'''
+    '''Custom Client for selfstats.py - Made by disabled verixx account'''
     _mentions_transforms = {
         '@everyone': '@\u200beveryone',
         '@here': '@\u200bhere'
