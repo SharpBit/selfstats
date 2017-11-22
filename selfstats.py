@@ -1,6 +1,5 @@
 import discord
 from discord.ext import commands
-from ext import embedtobox
 import textwrap
 import random
 import crasync
@@ -94,12 +93,7 @@ async def ping(ctx):
     em.title = 'Pong! Latency:'
     em.description = f'{bot.ws.latency * 1000:.4f} ms'
     em.color = random_color()
-    try:
-        await ctx.send(embed=em)
-    except discord.HTTPException:
-        em_list = await embedtobox.etb(em)
-        for page in em_list:
-            await ctx.send(page)
+    await ctx.send(embed=em)
 
 
 @bot.command(aliases=['bot', 'info'])
