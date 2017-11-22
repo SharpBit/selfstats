@@ -54,32 +54,12 @@ def tag():
     return os.environ.get('TAG') or tag
 
 
-def run_wizard():
-    '''Wizard for first start'''
-    print('------------------------------------------')
-    token = input('Enter your token:\n> ')
-    print('------------------------------------------')
-    prefix = input('Enter a prefix for your Clash Royale Stats selfbot:\n> ')
-    tag = input('Enter your Clash Royale tag:\n> ')
-    data = {
-        "TOKEN": token,
-        "PREFIX": prefix,
-        "TAG": tag
-    }
-    with open('data/config.json', 'w') as f:
-        f.write(json.dumps(data, indent=4))
-    print('------------------------------------------')
-    print('Restarting...')
-    print('------------------------------------------')
-    os.execv(sys.executable, ['python'] + sys.argv)
-
-
 async def on_ready():
     '''Bot startup, sets uptime'''
     print(textwrap.dedent(f'''
     Use this at your own risk,
     don't do anything stupid,
-    and when you get banned,
+    and when you get flagged,
     don't blame it at me.
     ---------------
     Client is ready!
