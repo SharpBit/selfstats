@@ -94,23 +94,6 @@ class Utility:
                     await ctx.send(page)
 
     @commands.command()
-    async def dcolor(self, ctx, *, url):
-        '''A command that gets the dominant color of an image url'''
-        await ctx.message.delete()
-        color = await ctx.get_dominant_color(url)
-        string_col = ColorNames.color_name(str(color))
-        info = f'`{str(color)}`\n`{color.to_rgb()}`\n`{str(string_col)}`'
-        em = discord.Embed(color=color, title='Dominant Color', description=info)
-        em.set_thumbnail(url=url)
-        em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
-        file = io.BytesIO()
-        Image.new('RGB', (200, 90), color.to_rgb()).save(file, format='PNG')
-        file.seek(0)
-        em.set_image(url="attachment://color.png")
-        await ctx.send(file=discord.File(file, 'color.png'), embed=em)
-
-    @commands.command()
     async def tinyurl(self, ctx, *, link: str):
         '''Makes a link shorter using the tinyurl api'''
         await ctx.message.delete()
