@@ -1,7 +1,5 @@
 import discord
 from discord.ext import commands
-from ext.colors import ColorNames
-from ext import embedtobox
 from PIL import Image
 import inspect
 import random
@@ -86,12 +84,7 @@ class Utility:
             em = discord.Embed(title='Command Help', color=color)
             embed = embed.strip('```')
             em.description = embed
-            try:
-                await ctx.send(embed=em)
-            except discord.HTTPException:
-                em_list = await embedtobox.etb(embed)
-                for page in em_list:
-                    await ctx.send(page)
+            await ctx.send(embed=em)
 
     @commands.command()
     async def tinyurl(self, ctx, *, link: str):
