@@ -61,7 +61,7 @@ class Clan:
         else:
             rank = f'{clan.rank}'
 
-        chest = f'{clan.clan_chest.crowns}/{clan.clan_chest.required)} ({(clan.clan_chest.crowns / clan.clan_chest.required) * 100:.3f}%)'
+        chest = f'{clan.clan_chest.crowns}/{clan.clan_chest.required} ({(clan.clan_chest.crowns / clan.clan_chest.required) * 100:.3f}%)'
         members = f'{len(clan.members)}/50'
 
         pushers = []
