@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-import crasync
+import clashroyale
 import aiohttp
 import random
 import json
@@ -110,15 +110,15 @@ class Profile:
         em.url = f'http://cr-api.com/profile/{tag}'
         em.set_author(name='Profile', icon_url=av)
 
-        em.add_field(name='Level', value=f'{profile.level} ({experience})')
+        em.add_field(name='Level', value=f'{profile.stats.level} ({experience})')
         em.add_field(name='Arena', value=profile.arena.name)
         em.add_field(
-            name='Trophies', value=f'{profile.current_trophies}/{profile.highest_trophies}(PB)/{profile.legend_trophies} Legend')
+            name='Trophies', value=f'{profile.current_trophies}/{profile.stats.max_trophies}(PB)/{profile.stats.legend_trophies} Legend')
         em.add_field(name='Global Rank', value=global_rank)
         em.add_field(name='Total Donations', value=f'{profile.total_donations}')
         em.add_field(name='Win Percentage',
-                     value=f'{(profile.wins / (profile.wins + profile.losses) * 100):.3f}%')
-        em.add_field(name='Max Challenge Wins', value=f'{profile.max_wins}')
+                     value=f'{(profile.games.wins / (profile.games.wins + profile.games.losses) * 100):.3f}%')
+        em.add_field(name='Max Challenge Wins', value=f'{profile.stats.challenge_max_wins}')
         em.add_field(name='Favorite Card', value=profile.favourite_card.replace('_', ' '))
         em.add_field(name='Game Record (Win Streak)', value=f'{record} ({profile.win_streak})')
         if profile.clan_role:
@@ -126,8 +126,8 @@ class Profile:
         else:
             em.add_field(name='Clan Info', value='No clan')
 
-        em.add_field(name='Tournament Cards Won', value=str(profile.tournament_cards_won))
-        em.add_field(name='Challenge Cards Won', value=str(profile.challenge_cards_won))
+        em.add_field(name='Tournament Cards Won', value=str(profile.stats.tournament_cards_won))
+        em.add_field(name='Challenge Cards Won', value=str(profile.stats.challenge_cards_won))
         em.add_field(name='Battle Deck', value=deck)
         em.add_field(name=f'Chests (Total {pos} opened)', value=chests)
         em.add_field(name='Chests Until', value=special)
@@ -139,7 +139,7 @@ class Profile:
 
         em.set_thumbnail(url=profile.arena.image_url)
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
+                      icon_url=f'https://cr-api.github.io/cr-api-assets/arenas/arena{profile.arena.arenaID}.png')
 
         await ctx.send(embed=em)
 
@@ -163,7 +163,7 @@ class Profile:
         em.title = profile.name
         em.set_author(
             name='Trophies', icon_url='http://clashroyalehack1.com/wp-content/uploads/2017/06/coctrophy.png')
-        em.description = f'Trophies: `{profile.current_trophies}`\nPersonal Best: `{profile.highest_trophies}`\nLegend Trophies: `{profile.legend_trophies}`'
+        em.description = f'Trophies: `{profile.trophies}`\nPersonal Best: `profile.stats.max_trophies}`\nLegend Trophies: `{profile.stats.legend_trophies}`'
         em.set_thumbnail(
             url='http://vignette1.wikia.nocookie.net/clashroyale/images/7/7c/LegendTrophy.png/revision/latest?cb=20160305151655')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
