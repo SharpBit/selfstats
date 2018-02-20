@@ -26,7 +26,7 @@ class Profile:
             else:
                 tag = config['TAG']
         self.tag = os.environ.get('TAG') or tag
-        self.client = crasync.Client()
+        self.client = clashroyale.Client("0ef94cfa74974bd5bf8ba09c809df0d313d562607da64482b85761dfbc7babec", is_async=True)
 
     def cdir(self, obj):
         return [x for x in dir(obj) if not x.startswith('_')]
@@ -59,8 +59,9 @@ class Profile:
                 return await ctx.send(embed=em)
         tag = tag.strip('#').replace('O', '0')
         try:
-            profile = await self.client.get_profile(tag)
+            profile = await self.client.get_player(tag)
         except Exception as e:
+            em = discord.Embed(title='Error!')
             em.description = f'`{e}`'
             return await ctx.send(embed=em)
 
@@ -73,8 +74,7 @@ class Profile:
             global_rank = str(profile.global_rank)
         else:
             global_rank = 'Unranked'
-        experience = f'{profile.experience[0]}/{profile.experience[1]}'
-        record = f'{profile.wins}-{profile.draws}-{profile.losses}'
+        record = f'{profile.games.wins}-{profile.games.draws}-{profile.games.losses}'
         av = profile.clan_badge_url or 'https://i.imgur.com/Y3uXsgj.png'
 
         chests = self.get_chests(ctx, profile)[0]
@@ -110,7 +110,7 @@ class Profile:
         em.url = f'http://cr-api.com/profile/{tag}'
         em.set_author(name='Profile', icon_url=av)
 
-        em.add_field(name='Level', value=f'{profile.stats.level} ({experience})')
+        em.add_field(name='Level', value=f'{profile.stats.level}')
         em.add_field(name='Arena', value=profile.arena.name)
         em.add_field(
             name='Trophies', value=f'{profile.current_trophies}/{profile.stats.max_trophies}(PB)/{profile.stats.legend_trophies} Legend')
@@ -119,7 +119,7 @@ class Profile:
         em.add_field(name='Win Percentage',
                      value=f'{(profile.games.wins / (profile.games.wins + profile.games.losses) * 100):.3f}%')
         em.add_field(name='Max Challenge Wins', value=f'{profile.stats.challenge_max_wins}')
-        em.add_field(name='Favorite Card', value=profile.favourite_card.replace('_', ' '))
+        em.add_field(name='Favorite Card', value=profile.stats.favorite_card.name.replace('_', ' '))
         em.add_field(name='Game Record (Win Streak)', value=f'{record} ({profile.win_streak})')
         if profile.clan_role:
             em.add_field(name='Clan Info', value=f'{clan.name}\n#{clan.tag}\n{profile.clan_role}')
@@ -136,10 +136,9 @@ class Profile:
             em.add_field(name=f'Previous Season Results (Season {s.number})', value=season)
         else:
             pass
-
-        em.set_thumbnail(url=profile.arena.image_url)
+        em.set_thumbnail(url=f'https://cr-api.github.io/cr-api-assets/arenas/arena{profile.arena.arenaID}.png')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url=f'https://cr-api.github.io/cr-api-assets/arenas/arena{profile.arena.arenaID}.png')
+                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
         await ctx.send(embed=em)
 
@@ -163,7 +162,7 @@ class Profile:
         em.title = profile.name
         em.set_author(
             name='Trophies', icon_url='http://clashroyalehack1.com/wp-content/uploads/2017/06/coctrophy.png')
-        em.description = f'Trophies: `{profile.trophies}`\nPersonal Best: `profile.stats.max_trophies}`\nLegend Trophies: `{profile.stats.legend_trophies}`'
+        em.description = f'Trophies: `{profile.trophies}`\nPersonal Best: `{profile.stats.max_trophies}`\nLegend Trophies: `{profile.stats.legend_trophies}`'
         em.set_thumbnail(
             url='http://vignette1.wikia.nocookie.net/clashroyale/images/7/7c/LegendTrophy.png/revision/latest?cb=20160305151655')
         em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',

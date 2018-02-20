@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import textwrap
 import random
-import crasync
+import clashroyale
 import aiohttp
 import psutil
 import json

@@ -26,7 +26,8 @@ class Clan:
             else:
                 tag = config['TAG']
         self.tag = os.environ.get('TAG') or tag
-        self.client = crasync.Client()
+        self.client = clashroyale.Client(token="0ef94cfa74974bd5bf8ba09c809df0d313d562607da64482b85761dfbc7babec", is_async=True)
+
 
     @commands.command()
     async def clan(self, ctx, clan_tag=None):
@@ -51,7 +52,7 @@ class Clan:
         try:
             clan = await profile.get_clan()
         except ValueError:
-            em.description = 'You are not in a clan'
+            em.description = 'You are not in a clan!'
             return await ctx.send(embed=em)
         except Exception as e:
             pass
@@ -61,8 +62,36 @@ class Clan:
         else:
             rank = f'{clan.rank}'
 
-        chest = f'{clan.clan_chest.crowns}/{clan.clan_chest.required} ({(clan.clan_chest.crowns / clan.clan_chest.required) * 100:.3f}%)'
-        members = f'{len(clan.members)}/50'
+        if clan.clan_chest.status == 'inactive':
+            tier = "Inactive"
+        else:
+            crowns = 0
+            for m in clan.members:
+                crowns += m.clan_chest_crowns
+            if crowns < 70:
+                tier = "0/10"
+            if crowns > 70 and crowns < 160:
+                tier = "1/10"
+            if crowns > 160 and crowns < 270:
+                tier = "2/10"
+            if crowns > 270 and crowns < 400:
+                tier = "3/10"
+            if crowns > 400 and crowns < 550:
+                tier = "4/10"
+            if crowns > 550 and crowns < 720:
+                tier = "5/10"
+            if crowns > 720 and crowns < 910:
+                tier = "6/10"
+            if crowns > 910 and crowns < 1120:
+                tier = "7/10"
+            if crowns > 1120 and crowns < 1350:
+                tier = "8/10"
+            if crowns > 1350 and crowns < 1600:
+                tier = "9/10"
+            if crowns == 1600:
+                tier = "10/10"
+        em.add_field(name='Clan Chest Tier', value=tier)
+        members = f'{clan.memberCount}/50'
 
         pushers = []
         if len(clan.members) >= 3:
@@ -82,7 +111,7 @@ class Clan:
         em.description = clan.description
 
         em.add_field(name='Score', value=f'{clan.score}')
-        em.add_field(name='Required Trophies', value=f'{clan.required_trophies}')
+        em.add_field(name='Required Trophies', value=f'{clan.requiredScore}')
         em.add_field(name='Donations', value=f'{clan.donations}')
         em.add_field(name='Region', value=clan.region)
         em.add_field(name='Global Rank', value=rank)
@@ -91,12 +120,10 @@ class Clan:
         em.add_field(name='Members', value=members)
         em.add_field(name='Top Players', value='\n\n'.join(pushers))
         em.add_field(name='Top Contributors', value='\n\n'.join(ccc))
-
-        em.set_thumbnail(url=clan.badge_url)
-        em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api',
-                      icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
-
+        em.set_thumbnail(url=clan.badge.image)
+        em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api', icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
         await ctx.send(embed=em)
+
 
     @commands.command()
     async def clanchest(self, ctx, clan=None):
@@ -203,7 +230,7 @@ class Clan:
 
             em.description = 'Here are the least valuable members of the clan currently.'
             em.set_author(name=clan)
-            em.set_thumbnail(url=clan.badge_url)
+            em.set_thumbnail(url=clan.badge.image)
             em.set_footer(text='Selfbot made by SharpBit | Powered by cr-api.com',
                           icon_url='http://cr-api.com/static/img/branding/cr-api-logo.png')
 
