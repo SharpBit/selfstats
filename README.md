@@ -1,4 +1,6 @@
 # selfstats.py: A stateless selfbot for Clash Royale Stats
+## NOTE:
+This project is depracated. Selfbots are against Discord's TOS and DO NOT BLAME ME IF YOU GET FLAGGED OR BANNED (btw the discord server and username below is outdated). Btw why do u even still play cr the game is ded
 ### Authors:
 - [SharpBit](https://github.com/SharpBit)
 ### Contributors:
